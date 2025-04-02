@@ -174,3 +174,20 @@ export interface Theme {
     textColor: string;
     backgroundColor: string;
 }
+
+// types.ts
+export interface MoveItem {
+    name: string;
+    value: string;
+    description?: string;
+    attribute?: string;
+}
+
+export interface MonsterMoveItem extends BaseListItem {
+    moves: MoveItem[]; // 确保这里是必填属性
+    weakness?: string[];
+}
+
+export interface MonsterMoveContent extends Omit<BaseContent, 'list'> {
+    list: MonsterMoveItem[];
+}

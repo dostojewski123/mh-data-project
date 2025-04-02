@@ -1,9 +1,9 @@
 import React from 'react';
-import { BaseContent } from '../types';
+import { MonsterMoveContent } from '../types';
 
 interface MonsterMovesPageProps {
     isDarkMode: boolean;
-    content: BaseContent;
+    content: MonsterMoveContent;
 }
 
 const MonsterMovesPage: React.FC<MonsterMovesPageProps> = ({ isDarkMode, content }) => {
