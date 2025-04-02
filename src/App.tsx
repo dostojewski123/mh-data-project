@@ -22,7 +22,7 @@ function App() {
   const [selectedGame, setSelectedGame] = useState<GameVersion>('world');
   const [selectedSection, setSelectedSection] = useState<ContentSection>('' as ContentSection);
 
-  const currentContent = gameContent[selectedGame] as GameContent;
+  const currentContent = gameContent[selectedGame] as unknown as GameContent;
 
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
 
