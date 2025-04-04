@@ -1,14 +1,14 @@
 import React from 'react';
-import Welcome1 from './Home/Welcome1';
-import Welcome2 from './Home/Welcome2';
-import FeatureCards from './Home/FeatureCards';
-import LatestUpdates from './Home/LatestUpdates'
+import Welcome1 from './Welcome1';
+import Welcome2 from './Welcome2';
+import FeatureCards from './FeatureCards';
+import LatestUpdates from './LatestUpdates'
 
-interface RiseHomeProps {
+interface WorldHomeProps {
     isDarkMode: boolean;
 }
 
-const RiseHome: React.FC<RiseHomeProps> = ({ isDarkMode }) => {
+const WorldHome: React.FC<WorldHomeProps> = ({ isDarkMode }) => {
     return (
         <div className={`min-h-screen ${isDarkMode ? 'bg-mh-starrysky' : 'bg-mh-parchment-1'}`}>
             <Welcome1 isDarkMode={isDarkMode} />
@@ -22,4 +22,4 @@ const RiseHome: React.FC<RiseHomeProps> = ({ isDarkMode }) => {
     );
 };
 
-export default RiseHome;
+export default WorldHome;
