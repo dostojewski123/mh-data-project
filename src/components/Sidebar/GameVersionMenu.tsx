@@ -1,5 +1,4 @@
 import React from 'react';
-import { Gamepad2 } from 'lucide-react';
 
 type GameVersion = 'world' | 'rise' | 'wilds';
 
@@ -15,8 +14,7 @@ const GameVersionMenu: React.FC<GameVersionMenuProps> = ({
     isDarkMode,
     selectedGame,
     setSelectedGame,
-    toggleSidebar,
-    showTitle = false
+    toggleSidebar
 }) => {
     const versionOptions = [
         { id: 'world', label: '怪物猎人：世界' },
@@ -34,15 +32,6 @@ const GameVersionMenu: React.FC<GameVersionMenuProps> = ({
 
     return (
         <div className="mb-6">
-            {showTitle && (
-                <h3 className={`flex items-center gap-2 mb-3 text-lg font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-800'
-                    }`}>
-                    <Gamepad2 className={`w-5 h-5 ${isDarkMode ? 'text-blue-400' : 'text-blue-600'
-                        }`} />
-                    <span>游戏版本</span>
-                </h3>
-            )}
-
             <div className="mt-2 space-y-2">
                 {versionOptions.map(({ id, label }) => (
                     <button
@@ -50,12 +39,12 @@ const GameVersionMenu: React.FC<GameVersionMenuProps> = ({
                         onTouchStart={() => handleInteraction(id)}
                         onClick={() => handleInteraction(id)}
                         className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${selectedGame === id
-                                ? isDarkMode
-                                    ? 'bg-gray-700 text-white'
-                                    : 'bg-blue-100 text-blue-800'
-                                : isDarkMode
-                                    ? 'hover:bg-gray-700 text-gray-300'
-                                    : 'hover:bg-gray-100 text-gray-700'
+                            ? isDarkMode
+                                ? 'bg-gray-700 text-white'
+                                : 'bg-mh-parchment-2 text-blue-800'
+                            : isDarkMode
+                                ? 'hover:bg-gray-700 text-gray-300'
+                                : 'hover:bg-gray-100 text-gray-700'
                             }`}
                         style={{
                             minHeight: '44px', // 符合移动端操作规范

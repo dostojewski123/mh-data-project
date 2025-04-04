@@ -12,13 +12,13 @@ const DataQueryMenu: React.FC<DataQueryMenuProps> = ({
 }) => {
     const queries = [
         { name: '历代怪猎发布时间线', icon: '📊' },
-        { name: '武器使用率排行', icon: '⚔️' },
-        { name: '怪物讨伐难度统计', icon: '🐉' }
+        { name: '全武器使用率排行', icon: '⚔️' },
+        { name: '全怪物热度官方投票统计', icon: '🐉' }
     ];
 
     return (
-        <div className="p-4 -ml-6">
-            <h3 className={`flex items-center gap-2 mb-3 text-lg font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-800'
+        <div className="pt-6 pb-3 px-3 -ml-6">
+            <h3 className={`flex items-center gap-2 mb-3 text-base font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-800'
                 }`}>
                 <Database className={`w-5 h-5 ml-1 ${isDarkMode ? 'text-purple-400' : 'text-purple-600'}`} /> {/* 图标左移 */}
                 <span className="ml-1">特殊数据查询</span> {/* 文字左移 */}

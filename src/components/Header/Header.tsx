@@ -13,7 +13,7 @@ const Header: React.FC<HeaderProps> = ({
     toggleSidebar
 }) => {
     return (
-        <header className="bg-mh-dark border-b border-mh-primary fixed top-0 left-0 right-0 z-50 h-16">
+        <header className="bg-mh-dark border-b border-mh-primary fixed top-0 left-0 right-0 z-50 h-12">
             <div className="container mx-auto px-4 h-full">
                 <div className="flex items-center justify-between h-full">
                     <div className="flex items-center gap-3">
@@ -28,7 +28,7 @@ const Header: React.FC<HeaderProps> = ({
 
                         {/* Logo部分 */}
                         <Sword className="w-6 h-6 text-mh-primary hidden md:block" />
-                        <span className="text-xl font-mh-title text-mh-primary tracking-wider">
+                        <span className="px-2 text-xl font-mh-title text-mh-primary tracking-wider">
                             猎人工坊
                         </span>
                     </div>

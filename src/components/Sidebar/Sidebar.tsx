@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { X, Gamepad2, Globe, Newspaper, AlertCircle } from 'lucide-react';
+import { X, Newspaper, Gamepad2, AlertCircle, Globe } from 'lucide-react';
 import GameVersionMenu from './GameVersionMenu';
-import SiteLinksMenu from './SiteLinksMenu';
 import OfficialNewsMenu from './OfficialNewsMenu';
 import QuickToolsMenu from './QuickToolsMenu';
-import QuickLinksMenu from './QuickLinksMenu';
 import DataQueryMenu from './DataQueryMenu';
+import QuickLinksMenu from './QuickLinksMenu';
+import SiteLinksMenu from './SiteLinksMenu';
 
 interface SidebarProps {
     isDarkMode: boolean;
@@ -23,7 +23,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     toggleSidebar
 }) => {
     const sidebarRef = useRef<HTMLDivElement>(null);
-    const contentRef = useRef<HTMLDivElement>(null);
+    const overlayRef = useRef<HTMLDivElement>(null);
     const touchStartRef = useRef<{ x: number; y: number } | null>(null);
     const lastTapRef = useRef(0);
     const [showModal, setShowModal] = useState(false);
@@ -43,7 +43,6 @@ const Sidebar: React.FC<SidebarProps> = ({
         const deltaX = touchX - touchStartRef.current.x;
         const deltaY = touchY - touchStartRef.current.y;
 
-        // 只有当不是垂直滚动时才触发侧边栏关闭
         if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaY) < 50) {
             if (deltaX < -30 && isOpen) {
                 toggleSidebar();
@@ -56,6 +55,13 @@ const Sidebar: React.FC<SidebarProps> = ({
         if (now - lastTapRef.current > 300) {
             toggleSidebar();
             lastTapRef.current = now;
+        }
+    };
+
+    const handleOverlayClick = (e: React.MouseEvent) => {
+        // 确保点击的是覆盖层本身，而不是它的子元素
+        if (e.target === overlayRef.current) {
+            handleImmediateToggle();
         }
     };
 
@@ -75,27 +81,25 @@ const Sidebar: React.FC<SidebarProps> = ({
 
     return (
         <>
-            {/* 可交互的侧边栏内容 */}
             <aside
                 ref={sidebarRef}
                 className={`fixed md:sticky z-40
-                    ${isDarkMode ? 'bg-mh-dark' : 'bg-white'}
+                    ${isDarkMode ? 'bg-mh-dark' : 'bg-[#F0E6D2]'}
                     border-r ${isDarkMode ? 'border-gray-800' : 'border-gray-200'}
                     transition-transform duration-300 ease-in-out
                     md:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
                 style={{
-                    width: '16rem',
-                    top: '4rem',
+                    width: '12rem',
+                    top: '3rem',
                     bottom: 0,
                 }}
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
             >
                 <nav className={`h-full flex flex-col ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}>
-                    {/* 移动端关闭按钮 */}
-                    <div className={`md:hidden flex items-center justify-between p-4 
-                        ${isDarkMode ? 'bg-mh-dark border-b border-gray-800' : 'bg-white border-b border-gray-200'}`}>
-                        <h3 className={`text-lg font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}>
+                    <div className={`ml-4 mr-4 md:hidden flex items-center justify-between p-2
+                        ${isDarkMode ? 'bg-mh-dark border-b border-gray-500' : 'bg-[#F0E6D2] border-b border-gray-100'}`}>
+                        <h3 className={`text-base font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}>
                             菜单
                         </h3>
                         <button
@@ -106,22 +110,14 @@ const Sidebar: React.FC<SidebarProps> = ({
                                 minHeight: '44px'
                             }}
                         >
-                            <X className={`w-6 h-6 ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`} />
+                            <X className={`ml-2 w-5 h-6 ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`} />
                         </button>
                     </div>
 
-                    {/* 内容区域 - 修改了这里的overflow设置 */}
-                    <div
-                        ref={contentRef}
-                        className="flex-1 overflow-y-auto"
-                        style={{
-                            WebkitOverflowScrolling: 'touch' // 启用iOS平滑滚动
-                        }}
-                    >
+                    <div className=" flex-1 overflow-y-auto">
                         <div className="p-4">
-                            {/* 1. 游戏版本 */}
-                            <div className={`pb-2 ${isDarkMode ? 'border-b border-gray-500' : 'border-b border-gray-200'}`}>
-                                <h3 className={`flex items-center gap-2 mb-3 text-lg font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}>
+                            <div className={`pt-2 ${isDarkMode ? 'border-b border-gray-500' : 'border-b border-gray-500'}`}>
+                                <h3 className={`flex items-center gap-2 mb-0 text-base font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}>
                                     <Gamepad2 className={`w-5 h-5 ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`} />
                                     <span>游戏版本</span>
                                 </h3>
@@ -134,9 +130,10 @@ const Sidebar: React.FC<SidebarProps> = ({
                                 />
                             </div>
 
+
                             {/* 2. 官方公告  */}
                             <div className={`pt-6 pb-2 ${isDarkMode ? 'border-b border-gray-500' : 'border-b border-gray-200'}`}>
-                                <h3 className={`flex items-center gap-2 mb-3 text-lg font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}>
+                                <h3 className={`flex items-center gap-2 mb-3 text-base font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}>
                                     <Newspaper className={`w-5 h-5 ${isDarkMode ? 'text-amber-400' : 'text-amber-600'}`} />
                                     <span>官方公告</span>
                                 </h3>
@@ -165,8 +162,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                             </div>
 
                             {/* 5. 快捷链接 */}
-                            <div className={`pt-6 pb-2 ${isDarkMode ? 'border-b border-gray-500' : 'border-b border-gray-200'}`}>
-                                <h3 className={`flex items-center gap-2 mb-3 text-lg font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}>
+                            <div className={`pt-8 pb-2 ${isDarkMode ? 'border-b border-gray-500' : 'border-b border-gray-200'}`}>
+                                <h3 className={`flex items-center gap-2 mb-3 text-base font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}>
                                     <span className="text-xl">🔗</span>
                                     <span>快捷链接</span>
                                 </h3>
@@ -176,8 +173,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                             </div>
 
                             {/* 6. 网站信息 */}
-                            <div className={`pt-6 pb-2 ${isDarkMode ? 'border-b border-gray-500' : 'border-b border-gray-200'}`}>
-                                <h3 className={`flex items-center gap-2 mb-3 text-lg font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}>
+                            <div className={`pt-8 pb-2 ${isDarkMode ? 'border-b border-gray-500' : 'border-b border-gray-200'}`}>
+                                <h3 className={`flex items-center gap-2 mb-3 text-base font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}>
                                     <Globe className={`w-5 h-5 ${isDarkMode ? 'text-green-400' : 'text-green-600'}`} />
                                     <span>网站信息</span>
                                 </h3>
@@ -186,18 +183,20 @@ const Sidebar: React.FC<SidebarProps> = ({
                                     showTitle={false}
                                 />
                             </div>
+
                         </div>
                     </div>
                 </nav>
             </aside>
 
-            {/* 移动端遮罩层 */}
             {isOpen && (
                 <div
+                    ref={overlayRef}
                     className="fixed inset-0 bg-black/50 z-30 md:hidden"
-                    onClick={handleImmediateToggle}
+                    onClick={handleOverlayClick}
                 />
             )}
+
             {/* 全局弹窗 */}
             {showModal && (
                 <div
@@ -230,6 +229,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                     </div>
                 </div>
             )}
+
         </>
     );
 };

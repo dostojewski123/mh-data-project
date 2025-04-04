@@ -9,9 +9,9 @@ interface SiteLinksMenuProps {
 const SiteLinksMenu: React.FC<SiteLinksMenuProps> = ({ isDarkMode, showTitle = true }) => {
     // 默认所有部分都展开
     const [expandedSections, setExpandedSections] = useState({
-        announcement: true,
-        feedback: true,
-        changelog: true
+        announcement: false,
+        feedback: false,
+        changelog: false
     });
 
     const contentRefs = {
@@ -35,6 +35,7 @@ const SiteLinksMenu: React.FC<SiteLinksMenuProps> = ({ isDarkMode, showTitle = t
 
     // 更新日志内容
     const changelog = [
+        "v1.0.0 - 重构全部代码以适应更好的扩展",
         "v0.0.9 - 追加侧边栏快捷链接模块",
         "v0.0.8 - 追加崛起和荒野的相关图例",
         "v0.0.7 - 追加侧边栏特殊数据查询入口",

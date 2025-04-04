@@ -11,13 +11,13 @@ const QuickToolsMenu: React.FC<QuickToolsMenuProps> = ({
 }) => {
     const tools = [
         { name: '游戏术语大全', icon: '📖' },
-        { name: '伤害公式计算器', icon: '🧮' },
-        { name: '荒野自动配装器', icon: '⚔️' }
+        { name: '伤害公式计算', icon: '🧮' },
+        { name: '荒野自动配装', icon: '⚔️' }
     ];
 
     return (
-        <div className="p-4 -ml-6">
-            <h3 className={`flex items-center gap-2 mb-3 text-lg font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-800'
+        <div className="pt-6 pb-3 px-3 -ml-6">
+            <h3 className={`flex items-center gap-2 mb-3 text-base font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-800'
                 }`}>
                 <span className="text-xl ml-1">🔧</span> {/* 图标微调 */}
                 <span className="ml-1">快捷工具</span> {/* 文字左移 */}

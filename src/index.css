@@ -8,7 +8,6 @@
     --dark-yellow: #e2c9a0;
   }
 
-  /* 关键修复：确保所有层级高度100% */
   html,
   body,
   #root {
@@ -16,32 +15,22 @@
   }
 
   body {
-    @apply bg-mh-dark text-mh-text font-mh-body;
+    @apply bg-mh-dark text-mh-text font-mh-body flex flex-col;
     background-image: url('/src/assets/mh-bg.jpg');
     background-size: cover;
     background-attachment: fixed;
-    display: flex;
-    /* 启用flex布局 */
-    flex-direction: column;
   }
 
-  /* 简化后的亮色主题 */
   body.light-theme {
-    @apply text-gray-800;
-    background-color: var(--light-yellow);
+    @apply text-gray-800 bg-[var(--light-yellow)];
     background-image: none;
   }
 
-  /* 标题样式调整 */
-  h1,
-  h2,
-  h3,
-  h4 {
+  h1, h2, h3, h4 {
     @apply font-mh-title;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
   }
 
-  .light-theme h1,
   .light-theme h2,
   .light-theme h3,
   .light-theme h4 {
@@ -51,62 +40,92 @@
 }
 
 @layer components {
-
-  /* 新增侧边栏修复样式 */
   .mh-sidebar {
-    @apply flex flex-col;
-    height: 100vh;
-    max-height: 100vh;
-    top: 0;
+    @apply fixed md:sticky z-40;
+    top: 3rem;
     bottom: 0;
+    width: 12rem;
   }
 
   .mh-sidebar-content {
-    @apply flex-1 overflow-y-auto;
+    height: calc(100vh - 7.5rem);
+    @apply overflow-y-auto;
   }
 
-  .banner-transition {
-    transition: background-image 0.5s ease-in-out;
-  }
-
-  /* 按钮 - 简化样式 */
   .mh-button {
-    @apply px-6 py-2 rounded-md font-mh-title font-bold tracking-wider;
-    @apply bg-gradient-to-b from-mh-primary to-yellow-700 text-mh-dark;
-    @apply shadow-md transition-all transform hover:scale-105;
-    @apply border-2 border-yellow-600 hover:border-yellow-400;
+    @apply px-6 py-2 rounded-md font-mh-title font-bold tracking-wider 
+           bg-gradient-to-b from-mh-primary to-yellow-700 text-mh-dark
+           shadow-md transition-all transform hover:scale-105
+           border-2 border-yellow-600 hover:border-yellow-400;
   }
 
   .light-theme .mh-button {
-    @apply bg-gradient-to-b from-yellow-600 to-yellow-800 text-white;
-    @apply border-yellow-700 hover:border-yellow-600;
+    @apply bg-gradient-to-b from-yellow-600 to-yellow-800 text-white
+           border-yellow-700 hover:border-yellow-600;
   }
 
-  /* 卡片 - 简化样式 */
   .mh-card {
-    @apply rounded-lg p-4 border;
-    @apply border-mh-primary shadow-md;
-    @apply bg-mh-dark;
+    @apply rounded-lg p-4 border border-mh-primary shadow-md bg-mh-dark;
   }
 
   .light-theme .mh-card {
     @apply border-amber-200 bg-amber-50;
   }
 
-  /* 输入框 - 简化样式 */
   .mh-input {
-    @apply rounded px-4 py-2;
-    @apply text-mh-text focus:outline-none focus:ring-2 focus:ring-yellow-500;
-    @apply bg-gray-700 border border-gray-600;
+    @apply rounded px-4 py-2 text-mh-text focus:outline-none 
+           focus:ring-2 focus:ring-yellow-500 bg-gray-700 border border-gray-600;
   }
 
   .light-theme .mh-input {
     @apply text-gray-800 bg-amber-100 border-amber-300;
   }
 
-  /* 新增：内容容器样式 */
   .mh-content-container {
     @apply flex-1 overflow-auto;
-    /* 允许内容区域滚动 */
   }
+
+}
+
+
+/* 自定义动画效果 */
+@keyframes glow {
+  0%, 100% { text-shadow: 0 0 8px rgba(255, 235, 59, 0.8); }
+  50% { text-shadow: 0 0 16px rgba(255, 235, 59, 1), 0 0 24px rgba(255, 152, 0, 0.6); }
+}
+
+@keyframes light-streak {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-glow-slow {
+  animation: glow 3s ease-in-out infinite;
+}
+
+.animate-light-streak {
+  animation: light-streak 8s linear infinite;
+}
+
+.animate-light-streak-delay {
+  animation: light-streak 8s linear infinite 2s;
+}
+
+.animate-light-streak-delay-delay {
+  animation: light-streak 8s linear infinite 4s;
+}
+
+.text-shadow-glow {
+  text-shadow: 0 0 8px rgba(255, 235, 59, 0.6);
+}
+
+.stable-scrollbar {
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  /* 隐藏滚动条 */
+  scrollbar-width: none; /* Firefox */
+}
+
+.stable-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Edge */
 }

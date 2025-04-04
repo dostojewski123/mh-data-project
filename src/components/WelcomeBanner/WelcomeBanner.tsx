@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import mhWorldBg from '../../images/mh-world-bg.webp';
-import mhRiseBg from '../../images/mh-rise-bg.webp';
-import mhWildsBg from '../../images/mh-wilds-bg.webp';
+import mhWorldBg from '../../assets/default/mh-world-bg.webp';
+import mhRiseBg from '../../assets/default/mh-rise-bg.webp';
+import mhWildsBg from '../../assets/default/mh-wilds-bg.webp';
 
 interface WelcomeBannerProps {
     selectedGame: 'world' | 'rise' | 'wilds';
@@ -9,55 +9,49 @@ interface WelcomeBannerProps {
 
 export default function WelcomeBanner({ selectedGame }: WelcomeBannerProps) {
     const [backgroundImage, setBackgroundImage] = useState(mhWorldBg);
+    const [gameTitle, setGameTitle] = useState('世界');
 
-    // 预加载所有背景图
     useEffect(() => {
-        // 动态创建 <link> 标签进行预加载
-        const preloadImages = [mhWorldBg, mhRiseBg, mhWildsBg];
-        preloadImages.forEach((src) => {
-            const link = document.createElement('link');
-            link.rel = 'preload';
-            link.as = 'image';
-            link.href = src;
-            document.head.appendChild(link);
-        });
+        // 预加载图片的更优方式
+        const img1 = new Image(); img1.src = mhWorldBg;
+        const img2 = new Image(); img2.src = mhRiseBg;
+        const img3 = new Image(); img3.src = mhWildsBg;
 
-        // 根据 selectedGame 更新背景图
         switch (selectedGame) {
             case 'world':
                 setBackgroundImage(mhWorldBg);
+                setGameTitle('世界');
                 break;
             case 'rise':
                 setBackgroundImage(mhRiseBg);
+                setGameTitle('崛起');
                 break;
             case 'wilds':
                 setBackgroundImage(mhWildsBg);
+                setGameTitle('荒野');
                 break;
             default:
                 setBackgroundImage(mhWorldBg);
+                setGameTitle('世界');
         }
-
-        // 清理函数（可选，避免内存泄漏）
-        return () => {
-            preloadImages.forEach((src) => {
-                const link = document.querySelector(`link[href="${src}"]`);
-                if (link) document.head.removeChild(link);
-            });
-        };
     }, [selectedGame]);
 
     return (
         <div
-            className="relative h-[500px] w-full overflow-hidden banner-transition mt-16"
+            className="relative h-[500px] w-full overflow-hidden mt-16 
+                      transition-all duration-500 ease-in-out"
             style={{
                 backgroundImage: `url(${backgroundImage})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
             }}
         >
             <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                <div className="text-center p-6 max-w-3xl">
-                    <h1 className="text-4xl font-bold text-white/86 mb-4">欢迎来到怪物猎人资料库！</h1>
+                <div className="text-center p-6 max-w-3xl font-kai">
+                    <h1 className="text-4xl font-bold text-white/86 mb-4 font-kai">
+                        欢迎来到{gameTitle}资料库！
+                    </h1>
                     <p className="text-2xl text-white/80 leading-[5]">
                         侧边栏可切换游戏版本
                     </p>

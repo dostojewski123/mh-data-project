@@ -3,45 +3,33 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
 import SubNavbar from './components/SubNavbar/SubNavbar';
-import Footer from './components/Footer/Footer';
 import WelcomeBanner from './components/WelcomeBanner/WelcomeBanner';
-import { gameContent } from './data/gameContent';
 import useTheme from './hooks/useTheme';
-import { GameVersion, GameContent, ContentSection } from './types'; // 导入 ContentSection
-import WeaponMovesPage from './pages/WeaponMovesPage/WeaponMovesPage';
-import WeaponMoveDetailPage from './pages/WeaponMovesPage/WeaponMoveDetailPage';
-import WeaponsPage from './pages/WeaponsPage';
-import ArmorPage from './pages/ArmorPage';
-import MonstersPage from './pages/MonstersPage';
-import MonsterMovesPage from './pages/MonsterMovesPage';
-import ContentGrid from './components/MainContent/ContentGrid';
+import { GameVersion } from './types';
+import WorldHome from './Pages/World/Home';
+import WorldWeaponMoves from './Pages/World/WeaponMoves';
+import WorldWeaponData from './Pages/World/WeaponMoves/WeaponDataPage';
+import RiseHome from './Pages/Rise/Home';
+import RiseWeaponMoves from './Pages/Rise/WeaponMoves';
+import WildsHome from './Pages/Wilds/Home';
+import WildsWeaponMoves from './Pages/Wilds/WeaponMoves';
+
 
 function App() {
   const { isDarkMode, toggleTheme } = useTheme();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [selectedGame, setSelectedGame] = useState<GameVersion>('world');
-  const [selectedSection, setSelectedSection] = useState<ContentSection>('' as ContentSection);
-
-  const currentContent = gameContent[selectedGame] as unknown as GameContent;
-
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
-
-  const handleGameChange = (game: GameVersion) => {
-    setSelectedGame(game);
-  };
-
-  const handleSectionChange = (section: ContentSection) => { // 参数类型改为 ContentSection
-    setSelectedSection(section);
-  };
+  const handleGameChange = (game: GameVersion) => setSelectedGame(game);
 
   return (
     <Router>
-      <div className={`min-h-screen flex flex-col ${isDarkMode ? 'bg-gray-900' : 'bg-white'}`}>
+      <div className={`min-h-screen flex flex-col ${isDarkMode ? 'bg-mh-dark' : 'bg-[#F0E6D2]'}`}>
         <Header isDarkMode={isDarkMode} toggleDarkMode={toggleTheme} toggleSidebar={toggleSidebar} />
         <div className="flex flex-1 overflow-hidden">
           <div
-            className={`flex-shrink-0 h-full transition-all duration-300 ease-in-out ${isSidebarOpen ? 'w-64' : 'w-0'
-              } overflow-hidden ${isDarkMode ? 'bg-gray-800' : 'bg-white'} pt-16`}
+            className={`flex-shrink-0 h-full transition-all duration-300 ease-in-out ${isSidebarOpen ? 'w-48' : 'w-0'
+              } overflow-hidden ${isDarkMode ? 'bg-gray-800' : 'bg-white'} pt-12`}
           >
             <Sidebar
               isDarkMode={isDarkMode}
@@ -52,67 +40,30 @@ function App() {
             />
           </div>
           <div
-            className={`flex-1 flex flex-col min-w-0 transition-all duration-300 ease-in-out ${isDarkMode ? 'bg-gray-900' : 'bg-white'
+            className={`flex-1 flex flex-col min-w-0 transition-all duration-300 ease-in-out ${isDarkMode ? 'bg-mh-starrysky' : 'bg-mh-parchment-1'
               }`}
           >
-            <SubNavbar isDarkMode={isDarkMode} selectedGame={selectedGame} />
+            <SubNavbar isDarkMode={isDarkMode} selectedGame={selectedGame} isSidebarOpen={isSidebarOpen} />
             <WelcomeBanner selectedGame={selectedGame} />
-            <div className="flex-1 overflow-auto">
+            <div className="flex-1 overflow-auto stable-scrollbar">
               <Routes>
-                <Route
-                  path="/"
-                  element={
-                    <ContentGrid
-                      isDarkMode={isDarkMode}
-                      currentContent={{
-                        monsters: {
-                          title: currentContent.monsters.title,
-                          image: currentContent.monsters.list[0].image,
-                          description: currentContent.monsters.description
-                        },
-                        weapons: {
-                          title: currentContent.weapons.title,
-                          image: currentContent.weapons.list[0].image,
-                          description: currentContent.weapons.description
-                        },
-                        armor: {
-                          title: currentContent.armor.title,
-                          image: currentContent.armor.list[0].image,
-                          description: currentContent.armor.description
-                        }
-                      }}
-                      setSelectedSection={handleSectionChange}
-                      selectedSection={selectedSection}
-                    />
-                  }
-                />
-                <Route
-                  path="/weapon-moves"
-                  element={<WeaponMovesPage isDarkMode={isDarkMode} content={currentContent.weaponMoves} />}
-                />
-                <Route
-                  path="/weapon-moves/:index"
-                  element={<WeaponMoveDetailPage isDarkMode={isDarkMode} content={currentContent.weaponMoves} />}
-                />
-                <Route
-                  path="/weapons"
-                  element={<WeaponsPage isDarkMode={isDarkMode} content={currentContent.weapons} />}
-                />
-                <Route
-                  path="/armor"
-                  element={<ArmorPage isDarkMode={isDarkMode} content={currentContent.armor} />}
-                />
-                <Route
-                  path="/monsters"
-                  element={<MonstersPage isDarkMode={isDarkMode} content={currentContent.monsters} />}
-                />
-                <Route
-                  path="/monster-moves"
-                  element={<MonsterMovesPage isDarkMode={isDarkMode} content={currentContent.monsterMoves} />}
-                />
+                {/* World 路由 */}
+                <Route path="/world" element={<WorldHome isDarkMode={isDarkMode} />} />
+                <Route path="/world/weapon-moves" element={<WorldWeaponMoves isDarkMode={isDarkMode} />} />
+                <Route path="/world/weapon-moves/:weaponName" element={<WorldWeaponData isDarkMode={isDarkMode} />} />
+
+                {/* Rise 路由 */}
+                <Route path="/rise" element={<RiseHome isDarkMode={isDarkMode} />} />
+                <Route path="/rise/weapon-moves" element={<RiseWeaponMoves isDarkMode={isDarkMode} />} />
+
+                {/* Wilds 路由 */}
+                <Route path="/wilds" element={<WildsHome isDarkMode={isDarkMode} />} />
+                <Route path="/wilds/weapon-moves" element={<WildsWeaponMoves isDarkMode={isDarkMode} />} />
+
+                {/* 默认路由 */}
+                <Route path="/" element={<WorldHome isDarkMode={isDarkMode} />} />
               </Routes>
             </div>
-            <Footer isDarkMode={isDarkMode} />
           </div>
         </div>
       </div>
