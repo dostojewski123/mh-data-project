@@ -5,7 +5,7 @@ interface WeaponDataPageProps {
     isDarkMode: boolean;
 }
 
-const WeaponDataPage: React.FC<WeaponDataPageProps> = ({ isDarkMode }) => {
+const WeaponDataPage: React.FC<WeaponDataPageProps> = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { weaponName } = useParams();
