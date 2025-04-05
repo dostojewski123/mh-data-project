@@ -5,6 +5,7 @@ import mhWildsBg from '../../assets/default/mh-wilds-bg.webp';
 
 interface WelcomeBannerProps {
     selectedGame: 'world' | 'rise' | 'wilds';
+    isDarkMode?: boolean; // 添加这行
 }
 
 export default function WelcomeBanner({ selectedGame }: WelcomeBannerProps) {

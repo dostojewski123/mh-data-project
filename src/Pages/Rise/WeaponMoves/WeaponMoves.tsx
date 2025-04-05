@@ -34,8 +34,10 @@ import insectglaiveDataImg1 from '../../../assets/weaponmoves/rise/modal/RISE-MV
 import insectglaiveDataImg2 from '../../../assets/weaponmoves/rise/modal/RISE-MV-IG-MODAL2.webp';
 import lightbowgunDataImg1 from '../../../assets/weaponmoves/rise/modal/RISE-MV-LB-MODAL1.webp';
 import lightbowgunDataImg2 from '../../../assets/weaponmoves/rise/modal/RISE-MV-LB-MODAL2.webp';
+import lightbowgunDataImg3 from '../../../assets/weaponmoves/rise/modal/RISE-MV-LB-MODAL3.webp';
 import heavybowgunDataImg1 from '../../../assets/weaponmoves/rise/modal/RISE-MV-HB-MODAL1.webp';
 import heavybowgunDataImg2 from '../../../assets/weaponmoves/rise/modal/RISE-MV-HB-MODAL2.webp';
+import heavybowgunDataImg3 from '../../../assets/weaponmoves/rise/modal/RISE-MV-HB-MODAL3.webp';
 import bowDataImg from '../../../assets/weaponmoves/rise/modal/RISE-MV-BOW-MODAL.webp';
 
 interface RiseWeaponMovesProps {
@@ -54,8 +56,8 @@ const weaponImages = [
     { name: '斩击斧', image: switchaxeImg, dataImage: switchaxeDataImg },
     { name: '充能斧', image: chargebladeImg, dataImage: chargebladeDataImg },
     { name: '操虫棍', image: insectglaiveImg, dataImage: [insectglaiveDataImg1, insectglaiveDataImg2] },
-    { name: '轻弩', image: lightbowgunImg, dataImage: [lightbowgunDataImg1, lightbowgunDataImg2] },
-    { name: '重弩', image: heavybowgunImg, dataImage: [heavybowgunDataImg1, heavybowgunDataImg2] },
+    { name: '轻弩', image: lightbowgunImg, dataImage: [lightbowgunDataImg1, lightbowgunDataImg2, lightbowgunDataImg3] },
+    { name: '重弩', image: heavybowgunImg, dataImage: [heavybowgunDataImg1, heavybowgunDataImg2, heavybowgunDataImg3] },
     { name: '弓', image: bowImg, dataImage: bowDataImg },
 ];
 

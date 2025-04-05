@@ -108,11 +108,11 @@
 }
 
 .animate-light-streak-delay {
-  animation: light-streak 8s linear infinite 2s;
+  animation: light-streak 6s linear infinite;
 }
 
 .animate-light-streak-delay-delay {
-  animation: light-streak 8s linear infinite 4s;
+  animation: light-streak 4s linear infinite;
 }
 
 .text-shadow-glow {

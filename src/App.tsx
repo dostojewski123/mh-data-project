@@ -1,15 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
 import SubNavbar from './components/SubNavbar/SubNavbar';
 import WelcomeBanner from './components/WelcomeBanner/WelcomeBanner';
-import useTheme from './hooks/useTheme';
+import applyTheme from './hooks/useTheme';
 import { GameVersion } from './types';
 import AnimatedRoutes from './AnimatedRoutes';
 
 function App() {
-  const { isDarkMode, toggleTheme } = useTheme();
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    if (typeof window === 'undefined') return 'dark';
+    if (localStorage.theme === 'dark' || localStorage.theme === 'light') {
+      return localStorage.theme;
+    }
+    return 'dark';
+  });
+
+  const isDarkMode = theme === 'dark';
+  const toggleTheme = () => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+
+  useEffect(() => {
+    applyTheme(theme);
+  }, [theme]);
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [selectedGame, setSelectedGame] = useState<GameVersion>('world');
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
@@ -39,7 +53,7 @@ function App() {
             <SubNavbar isDarkMode={isDarkMode} selectedGame={selectedGame} isSidebarOpen={isSidebarOpen} />
             <WelcomeBanner selectedGame={selectedGame} />
             <div className="flex-1 overflow-auto stable-scrollbar">
-              <AnimatedRoutes />
+              <AnimatedRoutes isDarkMode={isDarkMode} />
             </div>
           </div>
         </div>
