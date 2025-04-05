@@ -1,0 +1,109 @@
+/* lightning.css */
+.lightning-container {
+    position: relative;
+    display: inline-block;
+}
+
+.lightning-text {
+    position: relative;
+    z-index: 10;
+}
+
+.lightning-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 20;
+    mix-blend-mode: screen; /* 增加混合模式使闪电更亮 */
+}
+
+/* 更真实的闪电动画 */
+@keyframes lightning-flash {
+    0%, 100% { opacity: 0; }
+    1% { opacity: 0.1; }
+    2% { opacity: 0.9; }
+    3% { opacity: 0.2; }
+    4% { opacity: 0.8; }
+    5% { opacity: 0.3; }
+    6% { opacity: 0.7; }
+    7% { opacity: 0.4; }
+    8% { opacity: 0.6; }
+    10%, 15% { opacity: 0; }
+    20% { opacity: 0.4; }
+    25% { opacity: 0; }
+}
+
+/* 更自然的闪电主色调 */
+.lightning-white {
+    animation: lightning-flash var(--animation-duration, 3s) infinite ease-in-out;
+    animation-delay: calc(-1s * var(--random-delay, 0));
+}
+
+.lightning-red {
+    animation: lightning-flash var(--animation-duration, 3s) infinite ease-in-out;
+    animation-delay: calc(-1s * var(--random-delay, 0));
+}
+
+.lightning-yellow {
+    animation: lightning-flash var(--animation-duration, 3s) infinite ease-in-out;
+    animation-delay: calc(-1s * var(--random-delay, 0));
+}
+
+/* 闪电路径样式优化 */
+.lightning-path {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    transition: all 0.05s ease-out;
+    stroke-dasharray: 5, 2; /* 增加虚线效果使闪电更破碎 */
+    stroke-dashoffset: 10;
+}
+
+/* 闪电颜色和发光效果增强 */
+.lightning-white .lightning-path {
+    stroke: #f0f5ff;
+    filter: 
+        drop-shadow(0 0 2px rgba(255, 255, 255, 0.9))
+        drop-shadow(0 0 4px rgba(200, 230, 255, 0.8))
+        drop-shadow(0 0 8px rgba(150, 200, 255, 0.6));
+}
+
+.lightning-red .lightning-path {
+    stroke: #ff4d4d;
+    filter: 
+        drop-shadow(0 0 2px rgba(255, 100, 100, 0.9))
+        drop-shadow(0 0 4px rgba(255, 50, 50, 0.8))
+        drop-shadow(0 0 8px rgba(255, 0, 0, 0.6));
+}
+
+.lightning-yellow .lightning-path {
+    stroke: #ffff80;
+    filter: 
+        drop-shadow(0 0 2px rgba(255, 255, 150, 0.9))
+        drop-shadow(0 0 4px rgba(255, 255, 100, 0.8))
+        drop-shadow(0 0 8px rgba(255, 255, 50, 0.6));
+}
+
+/* 闪电后的余辉效果 */
+@keyframes afterglow {
+    0% { opacity: 0; }
+    10% { opacity: 0.8; }
+    100% { opacity: 0; }
+}
+
+.lightning-overlay::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, 
+        rgba(255, 255, 255, 0.3) 0%, 
+        transparent 70%);
+    opacity: 0;
+    pointer-events: none;
+    animation: afterglow 0.5s ease-out;
+    animation-delay: calc(var(--animation-duration, 1s) * 0.8);
+}
