@@ -131,7 +131,7 @@ const GameTermsPage: React.FC<GameTermsPageProps> = ({ isDarkMode }) => {
                 },
                 {
                     term: 'xppg, xhpg, hpg',
-                    explanation: '弓的蓄力连段, 由迅雷闪击, 蓄力步伐, 平射, 刚射四个部分组成, 取其拼音的首字母简写为：x（迅雷闪击）, h（蓄力步伐的俗称“滑步”）, p（平射）, g（刚射）, “xhpg”的意思的就是：迅雷闪击派生蓄力步伐派生平射派生刚射。',
+                    explanation: '弓的蓄力连段, 由迅雷闪击, 蓄力步伐, 平射, 刚射四个部分组成, 取其拼音的首字母简写为：x（迅雷闪击）, h（蓄力步伐的俗称“滑步”）, p（平射）, g（刚射）, “xhpg”的意思的就是：迅雷闪击派生蓄力步伐派生平射派生刚射, 简称迅滑平刚, hpg则为滑平刚, xppg为迅平平刚, hppg为滑平平刚。',
                     example: '这招可以打一个xhpg',
                     animation: 'slide'
                 },

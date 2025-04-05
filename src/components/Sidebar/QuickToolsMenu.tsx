@@ -13,7 +13,7 @@ const QuickToolsMenu: React.FC<QuickToolsMenuProps> = ({
     const navigate = useNavigate();
 
     const tools = [
-        { name: '游戏术语大全', icon: '📖', path: '/game-terms' },
+        { name: '术语黑话大全', icon: '📖', path: '/game-terms' },
         { name: '伤害公式计算', icon: '🧮', path: '' },
         { name: '荒野自动配装', icon: '⚔️', path: '' }
     ];

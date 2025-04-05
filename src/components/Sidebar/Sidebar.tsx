@@ -24,30 +24,72 @@ const Sidebar: React.FC<SidebarProps> = ({
 }) => {
     const sidebarRef = useRef<HTMLDivElement>(null);
     const overlayRef = useRef<HTMLDivElement>(null);
-    const touchStartRef = useRef<{ x: number; y: number } | null>(null);
+    const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
     const lastTapRef = useRef(0);
     const [showModal, setShowModal] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+    const touchThreshold = useRef(10); // 手势触发阈值，动态调整
+
+    useEffect(() => {
+        const checkIsMobile = () => {
+            const result = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            setIsMobile(result);
+            // 根据设备宽度动态调整阈值
+            touchThreshold.current = window.innerWidth > 768 ? 15 : 10;
+        };
+        checkIsMobile();
+        window.addEventListener('resize', checkIsMobile);
+        return () => window.removeEventListener('resize', checkIsMobile);
+    }, []);
 
     const handleTouchStart = (e: React.TouchEvent) => {
         touchStartRef.current = {
             x: e.touches[0].clientX,
-            y: e.touches[0].clientY
+            y: e.touches[0].clientY,
+            time: Date.now()
         };
     };
 
     const handleTouchMove = (e: React.TouchEvent) => {
-        if (!touchStartRef.current || !sidebarRef.current) return;
+        if (!touchStartRef.current) return;
 
         const touchX = e.touches[0].clientX;
         const touchY = e.touches[0].clientY;
         const deltaX = touchX - touchStartRef.current.x;
         const deltaY = touchY - touchStartRef.current.y;
 
-        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaY) < 50) {
-            if (deltaX < -30 && isOpen) {
+        // 如果垂直滚动超过阈值，则忽略水平滑动
+        if (Math.abs(deltaY) > touchThreshold.current * 1.5) {
+            touchStartRef.current = null;
+            return;
+        }
+
+        // 从左向右滑动打开侧边栏
+        if (!isOpen && deltaX > touchThreshold.current * 2 && touchStartRef.current.x < 30) {
+            toggleSidebar();
+            touchStartRef.current = null;
+            return;
+        }
+
+        // 从右向左滑动关闭侧边栏
+        if (isOpen && deltaX < -touchThreshold.current * 2) {
+            toggleSidebar();
+            touchStartRef.current = null;
+        }
+    };
+
+    const handleTouchEnd = () => {
+        // 快速轻扫检测
+        if (touchStartRef.current) {
+            const duration = Date.now() - touchStartRef.current.time;
+            const deltaX = touchStartRef.current.x - (window.event as TouchEvent).changedTouches[0].clientX;
+
+            // 快速轻扫关闭
+            if (isOpen && duration < 300 && Math.abs(deltaX) > touchThreshold.current * 3) {
                 toggleSidebar();
             }
         }
+        touchStartRef.current = null;
     };
 
     const handleImmediateToggle = () => {
@@ -59,15 +101,12 @@ const Sidebar: React.FC<SidebarProps> = ({
     };
 
     const handleOverlayClick = (e: React.MouseEvent) => {
-        // 确保点击的是覆盖层本身，而不是它的子元素
         if (e.target === overlayRef.current) {
             handleImmediateToggle();
         }
     };
 
     useEffect(() => {
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
         if (isOpen && isMobile) {
             document.body.style.overflow = 'hidden';
         } else {
@@ -77,7 +116,76 @@ const Sidebar: React.FC<SidebarProps> = ({
         return () => {
             document.body.style.overflow = '';
         };
-    }, [isOpen]);
+    }, [isOpen, isMobile]);
+
+    // 全局边缘滑动检测
+    useEffect(() => {
+        if (!isMobile) return;
+
+        let startX = 0;
+        let startY = 0;
+        let startTime = 0;
+
+        const handleTouchStart = (e: TouchEvent) => {
+            if (isOpen) return;
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            startTime = Date.now();
+        };
+
+        const handleTouchMove = (e: TouchEvent) => {
+            if (isOpen || startX === 0) return;
+
+            const currentX = e.touches[0].clientX;
+            const currentY = e.touches[0].clientY;
+            const deltaX = currentX - startX;
+            const deltaY = currentY - startY;
+
+            // 只有从边缘开始的水平滑动才有效
+            if (startX < 30 && Math.abs(deltaY) < touchThreshold.current * 1.5) {
+                // 实时跟随手指移动
+                if (deltaX > 0) {
+                    const translateX = Math.min(deltaX - touchThreshold.current, 200);
+                    if (sidebarRef.current) {
+                        sidebarRef.current.style.transform = `translateX(${-200 + translateX}px)`;
+                    }
+                }
+            }
+        };
+
+        const handleTouchEnd = (e: TouchEvent) => {
+            if (isOpen || startX === 0) return;
+
+            const endX = e.changedTouches[0].clientX;
+            const endTime = Date.now();
+            const deltaX = endX - startX;
+            const deltaTime = endTime - startTime;
+
+            // 重置侧边栏位置
+            if (sidebarRef.current) {
+                sidebarRef.current.style.transform = '';
+            }
+
+            // 满足条件时打开侧边栏
+            if (startX < 30 && deltaX > touchThreshold.current * 3 &&
+                (deltaX > 50 || deltaTime < 300)) {
+                toggleSidebar();
+            }
+
+            startX = 0;
+            startY = 0;
+        };
+
+        document.addEventListener('touchstart', handleTouchStart, { passive: false });
+        document.addEventListener('touchmove', handleTouchMove, { passive: false });
+        document.addEventListener('touchend', handleTouchEnd, { passive: false });
+
+        return () => {
+            document.removeEventListener('touchstart', handleTouchStart);
+            document.removeEventListener('touchmove', handleTouchMove);
+            document.removeEventListener('touchend', handleTouchEnd);
+        };
+    }, [isOpen, isMobile, toggleSidebar]);
 
     return (
         <>
@@ -92,9 +200,11 @@ const Sidebar: React.FC<SidebarProps> = ({
                     width: '12rem',
                     top: '3rem',
                     bottom: 0,
+                    touchAction: 'pan-y' // 优化触摸滚动行为
                 }}
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
             >
                 <nav className={`h-full flex flex-col ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}>
                     <div className={`ml-4 mr-4 md:hidden flex items-center justify-between p-2
@@ -203,6 +313,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                     ref={overlayRef}
                     className="fixed inset-0 bg-black/50 z-30 md:hidden"
                     onClick={handleOverlayClick}
+                    onTouchStart={handleTouchStart} // 覆盖层也响应触摸
                 />
             )}
 

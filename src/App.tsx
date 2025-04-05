@@ -7,6 +7,8 @@ import SubNavbar from './components/SubNavbar/SubNavbar';
 import applyTheme from './hooks/useTheme';
 import { GameVersion } from './types';
 import AnimatedRoutes from './AnimatedRoutes';
+import Footer from './components/Footer/Footer';
+
 
 function App() {
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
@@ -24,7 +26,7 @@ function App() {
     applyTheme(theme);
   }, [theme]);
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedGame, setSelectedGame] = useState<GameVersion>('world');
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
 
@@ -59,6 +61,7 @@ function App() {
           <SubNavbar isDarkMode={isDarkMode} selectedGame={selectedGame} isSidebarOpen={isSidebarOpen} />
           <div className="mt-20 flex-1 overflow-auto stable-scrollbar">
             <AnimatedRoutes isDarkMode={isDarkMode} />
+            <Footer isDarkMode={isDarkMode} />
           </div>
         </div>
       </div>
