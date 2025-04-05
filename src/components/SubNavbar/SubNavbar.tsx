@@ -53,19 +53,12 @@ const SubNavbar: React.FC<SubNavbarProps> = ({
     React.useEffect(() => {
         const currentPath = location.pathname;
         const currentGame = currentPath.split('/')[1] as GameVersion;
+        const validGames: GameVersion[] = ['world', 'rise', 'wilds'];
 
-        // 如果当前路径不属于选中的游戏版本
-        if (currentGame !== selectedGame) {
-            // 检查新版本是否有对应路径
-            const subPath = currentPath.split('/').slice(2).join('/');
-            let newPath = `/${selectedGame}`;
-
-            // 如果是武器相关路径且新版本支持该路径
-            if (subPath.startsWith('weapon-moves')) {
-                newPath = `/${selectedGame}/weapon-moves`;
-            }
-
-            navigate(newPath);
+        // 当 selectedGame 变化时，始终跳转到对应版本的主页
+        if (validGames.includes(currentGame) && currentGame !== selectedGame) {
+            // 直接跳转到版本主页，不保留子路径
+            navigate(`/${selectedGame}`);
         }
     }, [selectedGame, navigate, location.pathname]);
 

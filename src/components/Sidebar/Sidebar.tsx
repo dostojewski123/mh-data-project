@@ -148,10 +148,14 @@ const Sidebar: React.FC<SidebarProps> = ({
                             <div className={`pb-2 ${isDarkMode ? 'border-b border-gray-500' : 'border-b border-gray-200'}`}>
                                 <QuickToolsMenu
                                     isDarkMode={isDarkMode}
-                                    onToolClick={() => setShowModal(true)}
+                                    onToolClick={(toolName) => {
+                                        // 只有没有path的工具才会触发弹窗
+                                        if (toolName !== '游戏术语大全') {
+                                            setShowModal(true);
+                                        }
+                                    }}
                                 />
                             </div>
-
 
                             {/* 4. 新增-特殊数据查询 */}
                             <div className={`pt-4 pb-2 ${isDarkMode ? 'border-b border-gray-500' : 'border-b border-gray-200'}`}>

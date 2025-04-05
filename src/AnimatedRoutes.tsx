@@ -9,6 +9,7 @@ import RiseWeaponData from './Pages/Rise/WeaponMoves/WeaponDataPage';
 import WildsHome from './Pages/Wilds/Home/Home';
 import WildsWeaponMoves from './Pages/Wilds/WeaponMoves/WeaponMoves';
 import WildsWeaponData from './Pages/Wilds/WeaponMoves/WeaponDataPage';
+import GameTermsPage from './components/Sidebar/SidebarPages/GameTermsPage'; // 新增导入
 
 interface AnimatedRoutesProps {
     isDarkMode: boolean;
@@ -20,6 +21,21 @@ const AnimatedRoutes = ({ isDarkMode }: AnimatedRoutesProps) => {
     return (
         <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
+                {/* 新增游戏术语大全路由 - 全局路由（不属于特定游戏版本） */}
+                <Route
+                    path="/game-terms"
+                    element={
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            <GameTermsPage isDarkMode={isDarkMode} />
+                        </motion.div>
+                    }
+                />
+
                 {/* World 路由 */}
                 <Route
                     path="/world"
