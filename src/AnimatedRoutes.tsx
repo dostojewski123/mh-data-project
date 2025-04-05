@@ -17,6 +17,7 @@ const WildsWeaponData = lazy(() => import('./Pages/Wilds/WeaponMoves/WeaponDataP
 const GameTermsPage = lazy(() => import('./components/Sidebar/SidebarPages/GameTermsPage'));
 const WeaponUsagePage = lazy(() => import('./components/Sidebar/SidebarPages/WeaponUsagePage'));
 const MHReleaseTimeline = lazy(() => import('./components/Sidebar/SidebarPages/MHReleaseTimeline'));
+const MonsterPopularityPage = lazy(() => import('./components/Sidebar/SidebarPages/MonsterPopularityPage'));
 
 interface AnimatedRoutesProps {
     isDarkMode: boolean;
@@ -81,6 +82,22 @@ const AnimatedRoutes = ({ isDarkMode }: AnimatedRoutesProps) => {
                                 transition={{ duration: 0.3 }}
                             >
                                 <MHReleaseTimeline isDarkMode={isDarkMode} />
+                            </motion.div>
+                        </Suspense>
+                    }
+                />
+
+                <Route
+                    path="/monster-popularity"
+                    element={
+                        <Suspense fallback={<LoadingFallback />}>
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <MonsterPopularityPage isDarkMode={isDarkMode} />
                             </motion.div>
                         </Suspense>
                     }

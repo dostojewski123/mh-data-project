@@ -232,19 +232,17 @@ const MHReleaseTimeline: React.FC<ReleaseTimelineProps> = ({ isDarkMode }) => {
 
                 {/* 鱼骨图主体 */}
                 <div className="relative py-4 md:py-6 lg:py-8">
-                    {/* 中央脊椎 - 带有动画效果 */}
+                    {/* 桌面端中央脊椎 - 带有动画效果 */}
                     <motion.div
-                        className="absolute left-1/2 w-1 h-full -ml-0.5 bg-blue-500"
+                        className="hidden md:block absolute left-1/2 w-1 h-full -ml-0.5 bg-blue-500"
                         initial={{ height: 0 }}
                         animate={{ height: '100%' }}
                         transition={{ duration: 1.5, delay: 0.6 }}
-                    >
+                    />
 
-                    </motion.div>
-
-                    {/* 箭头元素 - 指向未来的方向 */}
+                    {/* 箭头元素 - 只在桌面端显示 */}
                     <motion.div
-                        className="absolute left-1/2 top-0 -ml-3"
+                        className="hidden md:block absolute left-1/2 top-0 -ml-3"
                         initial={{ y: -20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ delay: 1.8 }}
@@ -260,8 +258,81 @@ const MHReleaseTimeline: React.FC<ReleaseTimelineProps> = ({ isDarkMode }) => {
                         </svg>
                     </motion.div>
 
-                    {/* 版本卡片 */}
-                    <div className="space-y-8">
+                    {/* 移动端垂直布局 - 完全重构 */}
+                    <div className="md:hidden space-y-4 pl-4">
+                        {/* 时间轴线 */}
+                        <div className="absolute left-5 top-0 bottom-0 w-0.5 bg-blue-500 z-0" />
+
+                        {releases.map((release, index) => (
+                            <motion.div
+                                key={release.year}
+                                className="relative z-10"
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: index * 0.1 }}
+                            >
+                                {/* 时间节点标记 */}
+                                <div className="absolute -left-5 top-5 w-3 h-3 rounded-full bg-blue-500 border-2 border-white" />
+
+                                <div className={`ml-4 p-3 rounded-lg shadow ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}>
+                                    {/* 整体布局分为左右两部分 */}
+                                    <div className="flex flex-row">
+                                        {/* 左侧文本内容 */}
+                                        <div className="w-1/2 pr-4">
+                                            {/* 标题行 */}
+                                            <div className="flex items-start mb-2">
+                                                <span className="px-2 py-1 rounded-full text-xs font-bold bg-blue-500 text-white mr-2">
+                                                    {release.year}
+                                                </span>
+                                                <h3 className="text-lg font-bold text-blue-500 flex-1">
+                                                    {release.title}
+                                                </h3>
+                                            </div>
+
+                                            {/* 平台标签 - 横向滚动 */}
+                                            <div className="mb-2 overflow-x-auto hide-scrollbar">
+                                                <div className="flex gap-2 w-max">
+                                                    {release.platforms.map(platform => (
+                                                        <span
+                                                            key={platform}
+                                                            className="px-2 py-1 text-xs bg-indigo-500 text-white rounded whitespace-nowrap"
+                                                        >
+                                                            {platform}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>
+
+                                            {/* 游戏特性列表 */}
+                                            <ul className="space-y-3 text-sm pl-4 mb-3">
+                                                {release.notableFeatures.map((feature, i) => (
+                                                    <li key={i} className="relative before:content-['•'] before:absolute before:-left-3">
+                                                        {feature}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+
+                                        {/* 右侧封面图 */}
+                                        <div className="w-1/2 flex justify-end">
+                                            <img
+                                                src={release.cover}
+                                                alt={`${release.title}封面`}
+                                                className="w-32 h-40 object-cover rounded-md border"
+                                                onError={(e) => {
+                                                    const target = e.target as HTMLImageElement;
+                                                    target.src = 'https://via.placeholder.com/128x128?text=No+Cover';
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+
+                    {/* 桌面端鱼骨布局 - 保持不变 */}
+                    <div className="hidden md:block space-y-8">
                         {releases.map((release, index) => {
                             const isLeft = index % 2 === 0;
                             const position = (index / (releases.length - 1)) * 100;
@@ -282,7 +353,7 @@ const MHReleaseTimeline: React.FC<ReleaseTimelineProps> = ({ isDarkMode }) => {
                                 >
                                     {/* 连接线 */}
                                     <motion.div
-                                        className={`absolute top-1/2 h-px ${isLeft ? 'left-[260px] right-1/2' : 'right-[260px] left-1/2'} bg-blue-500`}
+                                        className={`absolute top-1/2 h-px ${isLeft ? 'left-[450px] right-1/2' : 'right-[450px] left-1/2'} bg-blue-500`}
                                         initial={{ scaleX: 0 }}
                                         animate={{ scaleX: 1 }}
                                         transition={{ delay: 0.9 + index * 0.1 }}
@@ -292,25 +363,22 @@ const MHReleaseTimeline: React.FC<ReleaseTimelineProps> = ({ isDarkMode }) => {
                                     <div className={`w-full max-w-md ${isLeft ? 'mr-auto' : 'ml-auto'}`}>
                                         <motion.div
                                             whileHover={{ scale: 1.03 }}
-                                            className={`p-4 rounded-lg shadow-lg flex flex-col md:flex-row gap-4 ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}
+                                            className={`p-4 rounded-lg shadow-lg flex flex-col md:flex-row gap-8 ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}
                                             style={{
                                                 borderTop: '3px solid #F59E0B'
                                             }}
                                         >
-                                            {/* 卡片内容保持不变 */}
                                             <div className="flex-shrink-0 relative">
                                                 <img
                                                     src={release.cover}
                                                     alt={`${release.title}封面`}
-                                                    className="w-32 h-32 object-cover rounded-md shadow-sm"
+                                                    className="w-44 h-44 object-cover rounded-md shadow-sm"
                                                     onError={(e) => {
                                                         const target = e.target as HTMLImageElement;
                                                         target.src = 'https://via.placeholder.com/128x128?text=No+Cover';
                                                     }}
                                                 />
-                                                <div
-                                                    className="absolute -top-2 -left-2 px-2 py-1 rounded-full text-xs font-bold shadow-sm bg-blue-500 text-white"
-                                                >
+                                                <div className="absolute -top-2 -left-2 px-2 py-1 rounded-full text-xs font-bold shadow-sm bg-blue-500 text-white">
                                                     {release.year}
                                                 </div>
                                             </div>
@@ -352,7 +420,7 @@ const MHReleaseTimeline: React.FC<ReleaseTimelineProps> = ({ isDarkMode }) => {
                     <h2
                         className="text-2xl font-bold mb-6 text-center text-yellow-500"
                     >
-                        系列里程碑分析
+                        系列里程碑
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <motion.div

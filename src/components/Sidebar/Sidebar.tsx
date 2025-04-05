@@ -150,17 +150,10 @@ const Sidebar: React.FC<SidebarProps> = ({
                                 />
                             </div>
 
-                            {/* 4. 新增-特殊数据查询 */}
-                            <div className={`pt-4 pb-2 ${isDarkMode ? 'border-b border-gray-500' : 'border-b border-gray-200'}`}>
-                                <DataQueryMenu
-                                    isDarkMode={isDarkMode}
-                                    onQueryClick={(queryName) => {
-                                        // 只有非武器使用率的查询才会触发弹窗
-                                        if (queryName !== '全武器使用率排行') {
-                                            setShowModal(true);
-                                        }
-                                    }}
-                                />
+                            {/* 4. 特殊数据查询 */}
+                            <div className={`pt-4 pb-2 ${isDarkMode ? 'border-b border-gray-500' : 'border-b border-gray-200'
+                                }`}>
+                                <DataQueryMenu isDarkMode={isDarkMode} />
                             </div>
 
                             {/* 5. 快捷链接 */}

@@ -568,7 +568,7 @@ const GameTermsPage: React.FC<GameTermsPageProps> = ({ isDarkMode }) => {
 
                                     {term.example && (
                                         <div className={`p-3 rounded-lg text-sm ${isDarkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-600'}`}>
-                                            <span className={`font-medium ${isDarkMode ? 'text-amber-400' : 'text-amber-600'}`}>实战示例:</span> {term.example}
+                                            <span className={`font-medium ${isDarkMode ? 'text-amber-400' : 'text-amber-600'}`}>用法示例:</span> {term.example}
                                         </div>
                                     )}
 
