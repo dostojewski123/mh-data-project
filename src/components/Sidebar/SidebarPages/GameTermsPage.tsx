@@ -64,9 +64,9 @@ const GameTermsPage: React.FC<GameTermsPageProps> = ({ isDarkMode }) => {
                     animation: 'jump'
                 },
                 {
-                    term: 'JR',
+                    term: '真蓄',
                     explanation: '大剑的"真蓄力斩"的简称(来自日语"真溜め斬り")，是大剑最高伤害的单次攻击',
-                    example: '预判怪物硬直打JR是大剑的核心技巧',
+                    example: '预判怪物硬直打真蓄是大剑的核心技巧',
                     animation: 'charge'
                 },
                 {
@@ -74,6 +74,18 @@ const GameTermsPage: React.FC<GameTermsPageProps> = ({ isDarkMode }) => {
                     explanation: '弓的蓄力射击后接回避的动作，可维持蓄力等级同时调整位置',
                     example: '滑步弓是冰原时期的主流玩法',
                     animation: 'slide'
+                },
+                {
+                    term: 'JR',
+                    explanation: '片手的Just Rush，官方名称为致命连击，是冰原中片手的一种连招，当闪烁红光时按下可以造成巨大伤害',
+                    example: '找准时机使用JR是片手的必备技巧之一',
+                    animation: 'move'
+                },
+                {
+                    term: '搓背',
+                    explanation: '双刀借助斜坡使用的特殊跳跃攻击，当命中怪物时会让猎人如同车轮一般滚过怪物的整条背部，并不断使用双刀劈砍滚过的位置',
+                    example: '绚辉龙红温后背部肉质很好，可以通过搓背来打出高额伤害',
+                    animation: 'move'
                 }
             ]
         },
@@ -109,6 +121,18 @@ const GameTermsPage: React.FC<GameTermsPageProps> = ({ isDarkMode }) => {
                     explanation: '怪物血量降低到一定程度后会离开当前区域的行为',
                     example: '等它换区后再捕获比较安全',
                     animation: 'move'
+                },
+                {
+                    term: '肉质',
+                    explanation: '怪物身上各个部位对不同武器种类（斩击，打击，弹吸收）的伤害吸收状况，肉质越好则武器造成的伤害越高',
+                    example: '怪物的头部斩击肉质为85，推荐使用大剑多次对头部进行攻击',
+                    animation: 'move'
+                },
+                {
+                    term: '打点',
+                    explanation: '指猎人抓住怪物的某一个部位不放，死追猛打的操作，通常为怪物肉质最好的部位，可以借此打出多次连续硬质帮助狩猎',
+                    example: '对这个怪物，可以通过对头和手交替输出，造成两次连续的倒地硬直帮助狩猎',
+                    animation: 'move'
                 }
             ]
         },
@@ -120,12 +144,6 @@ const GameTermsPage: React.FC<GameTermsPageProps> = ({ isDarkMode }) => {
                     explanation: '当前版本公认的最强泛用配装，多数玩家会优先制作',
                     example: '冰原时期的黑龙套就是校服',
                     animation: 'best'
-                },
-                {
-                    term: '护士',
-                    explanation: '护石的俗称，用于提供技能点数的装备',
-                    example: '刷了好久的痛击护士',
-                    animation: 'charm'
                 },
                 {
                     term: '珠子',
@@ -179,6 +197,12 @@ const GameTermsPage: React.FC<GameTermsPageProps> = ({ isDarkMode }) => {
                     explanation: '作为游戏封面和宣传主打的标志性怪物',
                     example: '世界的灭尽龙、崛起的怨虎龙',
                     animation: 'flagship'
+                },
+                {
+                    term: '世界警察',
+                    explanation: '一部分在所有地区都会出现且频繁乱入到猎人与其他怪物的战斗中的大型非古龙怪物',
+                    example: '金狮子，恐暴龙，爆鳞龙等',
+                    animation: 'move'
                 }
             ]
         },
@@ -214,6 +238,12 @@ const GameTermsPage: React.FC<GameTermsPageProps> = ({ isDarkMode }) => {
                     explanation: '利用地图中的环境要素(落石、藤蔓等)辅助战斗',
                     example: '引爆酸池可以造成大量伤害',
                     animation: 'environment'
+                },
+                {
+                    term: '斩味',
+                    explanation: '指武器的锋利度，从低到高依次为红橙黄绿蓝白紫，斩味越高则所拥有的伤害补正越高，可以对怪物造成更高的伤害，需要磨刀来保持斩味',
+                    example: '怪物换区了，可以趁机磨刀来保证战斗时可以造成最高伤害',
+                    animation: 'move'
                 }
             ]
         }
@@ -262,7 +292,7 @@ const GameTermsPage: React.FC<GameTermsPageProps> = ({ isDarkMode }) => {
                 className="mb-8"
             >
                 <h1 className={`text-3xl md:text-4xl font-bold mb-4 ${isDarkMode ? 'text-amber-400' : 'text-amber-600'}`}>
-                    怪物猎人术语词典 (方便起见目前是AI生成的词典，之后会改)
+                    怪物猎人术语词典
                 </h1>
                 <p className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                     探索怪物猎人世界的专业术语和猎人黑话，成为真正的老猎人！
