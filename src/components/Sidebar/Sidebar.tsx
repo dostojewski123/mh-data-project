@@ -24,7 +24,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 }) => {
     const sidebarRef = useRef<HTMLDivElement>(null);
     const overlayRef = useRef<HTMLDivElement>(null);
-    const touchStartRef = useRef<{ x: number; y: number; time: number; isEdgeSwipe: boolean } | null>(null);
+    const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
     const [showModal, setShowModal] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const touchThreshold = useRef(15); // 手势触发阈值
@@ -55,8 +55,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         touchStartRef.current = {
             x: e.touches[0].clientX,
             y: e.touches[0].clientY,
-            time: Date.now(),
-            isEdgeSwipe: e.touches[0].clientX < 30
+            time: Date.now()
         };
     };
 
@@ -74,8 +73,8 @@ const Sidebar: React.FC<SidebarProps> = ({
             return;
         }
 
-        // 从左向右滑动打开侧边栏
-        if (!isOpen && touchStartRef.current.isEdgeSwipe && deltaX > touchThreshold.current) {
+        // 从左向右滑动打开侧边栏（从任意位置）
+        if (!isOpen && deltaX > touchThreshold.current) {
             isAnimating.current = true;
             toggleSidebar();
             setTimeout(() => isAnimating.current = false, 300);
@@ -83,7 +82,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             return;
         }
 
-        // 从右向左滑动关闭侧边栏
+        // 从右向左滑动关闭侧边栏（从任意位置）
         if (isOpen && deltaX < -touchThreshold.current) {
             isAnimating.current = true;
             toggleSidebar();
@@ -128,7 +127,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         };
     }, [isOpen, isMobile]);
 
-    // 全局边缘滑动检测 - 更灵敏的实现
+    // 全局滑动检测 - 任意位置滑动
     useEffect(() => {
         if (!isMobile) return;
 
@@ -137,27 +136,30 @@ const Sidebar: React.FC<SidebarProps> = ({
         let isSwiping = false;
 
         const handleTouchStart = (e: TouchEvent) => {
-            if (isOpen || isAnimating.current) return;
+            if (isAnimating.current) return;
             startX = e.touches[0].clientX;
             startTime = Date.now();
-            isSwiping = startX < 30; // 只有从边缘开始的才算滑动
+            isSwiping = true;
         };
 
         const handleTouchMove = (e: TouchEvent) => {
-            if (!isSwiping || isOpen || isAnimating.current) return;
+            if (!isSwiping || isAnimating.current) return;
 
             const currentX = e.touches[0].clientX;
             const deltaX = currentX - startX;
 
             // 实时跟随手指移动
-            if (deltaX > 0 && sidebarRef.current) {
+            if (!isOpen && deltaX > 0 && sidebarRef.current) {
                 sidebarRef.current.style.transition = 'none';
                 sidebarRef.current.style.transform = `translateX(${-200 + Math.min(deltaX, 200)}px)`;
+            } else if (isOpen && deltaX < 0 && sidebarRef.current) {
+                sidebarRef.current.style.transition = 'none';
+                sidebarRef.current.style.transform = `translateX(${Math.max(deltaX, -200)}px)`;
             }
         };
 
         const handleTouchEnd = (e: TouchEvent) => {
-            if (!isSwiping || isOpen || isAnimating.current) {
+            if (!isSwiping || isAnimating.current) {
                 isSwiping = false;
                 return;
             }
@@ -172,9 +174,9 @@ const Sidebar: React.FC<SidebarProps> = ({
                 sidebarRef.current.style.transform = '';
             }
 
-            // 满足条件时打开侧边栏
-            if (deltaX > touchThreshold.current ||
-                (deltaTime < 300 && deltaX > 30)) {
+            // 满足条件时切换侧边栏状态
+            if ((!isOpen && (deltaX > touchThreshold.current || (deltaTime < 300 && deltaX > 30))) ||
+                (isOpen && (deltaX < -touchThreshold.current || (deltaTime < 300 && deltaX < -30)))) {
                 isAnimating.current = true;
                 toggleSidebar();
                 setTimeout(() => isAnimating.current = false, 300);
