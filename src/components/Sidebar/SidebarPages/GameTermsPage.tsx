@@ -547,8 +547,8 @@ const GameTermsPage: React.FC<GameTermsPageProps> = ({ isDarkMode }) => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
             >
-                <p>数据基于《怪物猎人 世界:冰原》和《怪物猎人 崛起:曙光》</p>
-                <p className="mt-1">术语解释可能有版本差异, 欢迎指正补充</p>
+                <p>数据基于《怪物猎人 世界:冰原》、《怪物猎人 崛起:曙光》和《怪物猎人:荒野》</p>
+                <p className="mt-1">术语和黑话的解释可能有版本差异, 欢迎指正补充</p>
             </motion.footer>
         </div>
     );

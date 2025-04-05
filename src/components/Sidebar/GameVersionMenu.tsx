@@ -62,10 +62,10 @@ const GameVersionMenu: React.FC<GameVersionMenuProps> = ({
         // 只有在以下条件满足时才触发切换：
         // 1. 触摸和松开是同一个目标
         // 2. 用户没有明显滑动
-        // 3. 触摸持续时间在合理范围内(100-300ms)
+        // 3. 触摸持续时间在合理范围内(30-100ms)
         if (target === game && !moved) {
             const duration = Date.now() - startTime;
-            if (duration > 50 && duration < 150) {
+            if (duration > 30 && duration < 100) {
                 handleInteraction(game);
             }
         }

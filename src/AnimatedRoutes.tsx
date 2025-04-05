@@ -1,77 +1,88 @@
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import WorldHome from './Pages/World/Home/Home';
-import WorldWeaponMoves from './Pages/World/WeaponMoves/WeaponMoves';
-import WorldWeaponData from './Pages/World/WeaponMoves/WeaponDataPage';
-import RiseHome from './Pages/Rise/Home/Home';
-import RiseWeaponMoves from './Pages/Rise/WeaponMoves/WeaponMoves';
-import RiseWeaponData from './Pages/Rise/WeaponMoves/WeaponDataPage';
-import WildsHome from './Pages/Wilds/Home/Home';
-import WildsWeaponMoves from './Pages/Wilds/WeaponMoves/WeaponMoves';
-import WildsWeaponData from './Pages/Wilds/WeaponMoves/WeaponDataPage';
-import GameTermsPage from './components/Sidebar/SidebarPages/GameTermsPage';
-import WeaponUsagePage from './components/Sidebar/SidebarPages/WeaponUsagePage';
-import MHReleaseTimeline from './components/Sidebar/SidebarPages/MHReleaseTimeline';
 
+// 一级页面（保持直接导入或也可以懒加载）
+import WorldHome from './Pages/World/Home/Home';
+import RiseHome from './Pages/Rise/Home/Home';
+import WildsHome from './Pages/Wilds/Home/Home';
+
+// 二级页面使用懒加载
+const WorldWeaponMoves = lazy(() => import('./Pages/World/WeaponMoves/WeaponMoves'));
+const WorldWeaponData = lazy(() => import('./Pages/World/WeaponMoves/WeaponDataPage'));
+const RiseWeaponMoves = lazy(() => import('./Pages/Rise/WeaponMoves/WeaponMoves'));
+const RiseWeaponData = lazy(() => import('./Pages/Rise/WeaponMoves/WeaponDataPage'));
+const WildsWeaponMoves = lazy(() => import('./Pages/Wilds/WeaponMoves/WeaponMoves'));
+const WildsWeaponData = lazy(() => import('./Pages/Wilds/WeaponMoves/WeaponDataPage'));
+const GameTermsPage = lazy(() => import('./components/Sidebar/SidebarPages/GameTermsPage'));
+const WeaponUsagePage = lazy(() => import('./components/Sidebar/SidebarPages/WeaponUsagePage'));
+const MHReleaseTimeline = lazy(() => import('./components/Sidebar/SidebarPages/MHReleaseTimeline'));
 
 interface AnimatedRoutesProps {
     isDarkMode: boolean;
 }
 
+// 加载中的回退组件
+const LoadingFallback = () => (
+    <div className="flex justify-center items-center h-full">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+    </div>
+);
+
 const AnimatedRoutes = ({ isDarkMode }: AnimatedRoutesProps) => {
     const location = useLocation();
 
-    // 监听路由变化并滚动到顶部
     useEffect(() => {
-        window.scrollTo(0, 0); // 直接滚动到顶部
-    }, [location.pathname]); // 依赖于路径变化
+        window.scrollTo(0, 0);
+    }, [location.pathname]);
 
     return (
         <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
-                {/* 新增游戏术语大全路由 - 全局路由（不属于特定游戏版本） */}
+                {/* 全局路由 */}
                 <Route
                     path="/game-terms"
                     element={
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            <GameTermsPage isDarkMode={isDarkMode} />
-                        </motion.div>
+                        <Suspense fallback={<LoadingFallback />}>
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <GameTermsPage isDarkMode={isDarkMode} />
+                            </motion.div>
+                        </Suspense>
                     }
                 />
-
-                {/* 新增全武器使用率排行 - 全局路由（不属于特定游戏版本） */}
                 <Route
                     path="/weapon-usage"
                     element={
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            <WeaponUsagePage isDarkMode={isDarkMode} />
-                        </motion.div>
+                        <Suspense fallback={<LoadingFallback />}>
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <WeaponUsagePage isDarkMode={isDarkMode} />
+                            </motion.div>
+                        </Suspense>
                     }
                 />
-
-
                 <Route
                     path="/mh-release-timeline"
                     element={
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            <MHReleaseTimeline isDarkMode={isDarkMode} />
-                        </motion.div>
+                        <Suspense fallback={<LoadingFallback />}>
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <MHReleaseTimeline isDarkMode={isDarkMode} />
+                            </motion.div>
+                        </Suspense>
                     }
                 />
 
@@ -92,27 +103,31 @@ const AnimatedRoutes = ({ isDarkMode }: AnimatedRoutesProps) => {
                 <Route
                     path="/world/weapon-moves"
                     element={
-                        <motion.div
-                            initial={{ opacity: 0, x: 50 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -50 }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            <WorldWeaponMoves isDarkMode={isDarkMode} />
-                        </motion.div>
+                        <Suspense fallback={<LoadingFallback />}>
+                            <motion.div
+                                initial={{ opacity: 0, translateX: '50px' }}
+                                animate={{ opacity: 1, translateX: '0px' }}
+                                exit={{ opacity: 0, translateX: '-50px' }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <WorldWeaponMoves isDarkMode={isDarkMode} />
+                            </motion.div>
+                        </Suspense>
                     }
                 />
                 <Route
                     path="/world/weapon-moves/:weaponName"
                     element={
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            <WorldWeaponData isDarkMode={isDarkMode} />
-                        </motion.div>
+                        <Suspense fallback={<LoadingFallback />}>
+                            <motion.div
+                                initial={{ opacity: 0, translateY: '20px' }}
+                                animate={{ opacity: 1, translateY: '0px' }}
+                                exit={{ opacity: 0, translateY: '-20px' }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <WorldWeaponData isDarkMode={isDarkMode} />
+                            </motion.div>
+                        </Suspense>
                     }
                 />
 
@@ -133,27 +148,31 @@ const AnimatedRoutes = ({ isDarkMode }: AnimatedRoutesProps) => {
                 <Route
                     path="/rise/weapon-moves"
                     element={
-                        <motion.div
-                            initial={{ opacity: 0, x: 50 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -50 }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            <RiseWeaponMoves isDarkMode={isDarkMode} />
-                        </motion.div>
+                        <Suspense fallback={<LoadingFallback />}>
+                            <motion.div
+                                initial={{ opacity: 0, translateX: '50px' }}
+                                animate={{ opacity: 1, translateX: '0px' }}
+                                exit={{ opacity: 0, translateX: '-50px' }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <RiseWeaponMoves isDarkMode={isDarkMode} />
+                            </motion.div>
+                        </Suspense>
                     }
                 />
                 <Route
                     path="/rise/weapon-moves/:weaponName"
                     element={
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            <RiseWeaponData isDarkMode={isDarkMode} />
-                        </motion.div>
+                        <Suspense fallback={<LoadingFallback />}>
+                            <motion.div
+                                initial={{ opacity: 0, translateY: '20px' }}
+                                animate={{ opacity: 1, translateY: '0px' }}
+                                exit={{ opacity: 0, translateY: '-20px' }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <RiseWeaponData isDarkMode={isDarkMode} />
+                            </motion.div>
+                        </Suspense>
                     }
                 />
 
@@ -174,27 +193,31 @@ const AnimatedRoutes = ({ isDarkMode }: AnimatedRoutesProps) => {
                 <Route
                     path="/wilds/weapon-moves"
                     element={
-                        <motion.div
-                            initial={{ opacity: 0, x: 50 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -50 }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            <WildsWeaponMoves isDarkMode={isDarkMode} />
-                        </motion.div>
+                        <Suspense fallback={<LoadingFallback />}>
+                            <motion.div
+                                initial={{ opacity: 0, translateX: '50px' }}
+                                animate={{ opacity: 1, translateX: '0px' }}
+                                exit={{ opacity: 0, translateX: '-50px' }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <WildsWeaponMoves isDarkMode={isDarkMode} />
+                            </motion.div>
+                        </Suspense>
                     }
                 />
                 <Route
                     path="/wilds/weapon-moves/:weaponName"
                     element={
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            <WildsWeaponData isDarkMode={isDarkMode} />
-                        </motion.div>
+                        <Suspense fallback={<LoadingFallback />}>
+                            <motion.div
+                                initial={{ opacity: 0, translateY: '20px' }}
+                                animate={{ opacity: 1, translateY: '0px' }}
+                                exit={{ opacity: 0, translateY: '-20px' }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <WildsWeaponData isDarkMode={isDarkMode} />
+                            </motion.div>
+                        </Suspense>
                     }
                 />
 
