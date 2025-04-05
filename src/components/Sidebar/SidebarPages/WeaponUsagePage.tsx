@@ -45,9 +45,9 @@ const WeaponUsagePage: React.FC<WeaponUsagePageProps> = ({ isDarkMode }) => {
     // 原始数据
     const rawData = {
         world: [
-            { weapon: '太刀', rate: 24.0, trend: '→', description: '居合斩机制保持稳定人气' },
-            { weapon: '大剑', rate: 11.0, trend: '↑', description: '真蓄力斩爆发仍受高玩青睐' },
-            { weapon: '双剑', rate: 9.0, trend: '↓', description: '鬼人化在冰原适应性下降' },
+            { weapon: '太刀', rate: 24.0, trend: '→', description: '居合登龙流畅帅气两不误' },
+            { weapon: '大剑', rate: 11.0, trend: '↑', description: '真蓄，爽！强化射击快速真蓄，爽上加爽！' },
+            { weapon: '双剑', rate: 9.0, trend: '↓', description: '小陀螺滑步连斩流畅蹭刀全程不停歇' },
             { weapon: '弓', rate: 9.0, trend: '↑', description: '属性速射流后期表现优异' },
             { weapon: '盾斧', rate: 8.0, trend: '↓↓', description: '超解动作值削弱影响热情' },
             { weapon: '操虫棍', rate: 8.0, trend: '→', description: '空中机动性有不可替代性' },

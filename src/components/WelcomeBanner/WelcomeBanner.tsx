@@ -39,8 +39,7 @@ export default function WelcomeBanner({ selectedGame }: WelcomeBannerProps) {
 
     return (
         <div
-            className="relative h-[500px] w-full overflow-hidden
-                      transition-all duration-500 ease-in-out"
+            className="relative h-[500px] w-full overflow-hidden"
             style={{
                 backgroundImage: `url(${backgroundImage})`,
                 backgroundSize: 'cover',

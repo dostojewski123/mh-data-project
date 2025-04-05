@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 type GameVersion = 'world' | 'rise' | 'wilds';
 
@@ -22,22 +22,77 @@ const GameVersionMenu: React.FC<GameVersionMenuProps> = ({
         { id: 'wilds', label: '怪物猎人：荒野' }
     ] as const;
 
+    const touchStateRef = useRef({
+        startTime: 0,
+        startX: 0,
+        startY: 0,
+        target: null as GameVersion | null,
+        moved: false
+    });
+
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
+    const handleTouchStart = (e: React.TouchEvent, game: GameVersion) => {
+        const touch = e.touches[0];
+        touchStateRef.current = {
+            startTime: Date.now(),
+            startX: touch.clientX,
+            startY: touch.clientY,
+            target: game,
+            moved: false
+        };
+    };
+
+    const handleTouchMove = (e: React.TouchEvent) => {
+        if (!touchStateRef.current.target) return;
+
+        const touch = e.touches[0];
+        const deltaX = Math.abs(touch.clientX - touchStateRef.current.startX);
+        const deltaY = Math.abs(touch.clientY - touchStateRef.current.startY);
+
+        // 如果移动距离超过5px，则认为用户是在滑动
+        if (deltaX > 5 || deltaY > 5) {
+            touchStateRef.current.moved = true;
+        }
+    };
+
+    const handleTouchEnd = (game: GameVersion) => {
+        const { startTime, target, moved } = touchStateRef.current;
+
+        // 只有在以下条件满足时才触发切换：
+        // 1. 触摸和松开是同一个目标
+        // 2. 用户没有明显滑动
+        // 3. 触摸持续时间在合理范围内(100-300ms)
+        if (target === game && !moved) {
+            const duration = Date.now() - startTime;
+            if (duration > 100 && duration < 300) {
+                handleInteraction(game);
+            }
+        }
+
+        touchStateRef.current.target = null;
+    };
+
     const handleInteraction = (game: GameVersion) => {
         setSelectedGame(game);
-        // 移动端切换后自动关闭侧边栏
-        if (window.innerWidth < 768 && toggleSidebar) {
+        if (isMobile && toggleSidebar) {
             toggleSidebar();
         }
     };
 
     return (
         <div className="mb-6">
-            <div className="mt-2 space-y-2">
+            <div
+                className="mt-2 space-y-2"
+                onTouchMove={handleTouchMove}
+            >
                 {versionOptions.map(({ id, label }) => (
                     <button
                         key={id}
-                        onTouchStart={() => handleInteraction(id)}
-                        onClick={() => handleInteraction(id)}
+                        onTouchStart={(e) => handleTouchStart(e, id)}
+                        onTouchEnd={() => handleTouchEnd(id)}
+                        onTouchCancel={() => { touchStateRef.current.target = null }}
+                        onClick={() => !isMobile && handleInteraction(id)}
                         className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${selectedGame === id
                             ? isDarkMode
                                 ? 'bg-gray-700 text-white'
@@ -47,7 +102,7 @@ const GameVersionMenu: React.FC<GameVersionMenuProps> = ({
                                 : 'hover:bg-gray-100 text-gray-700'
                             }`}
                         style={{
-                            minHeight: '44px', // 符合移动端操作规范
+                            minHeight: '44px',
                             WebkitTapHighlightColor: 'transparent',
                             touchAction: 'manipulation'
                         }}
