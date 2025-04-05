@@ -50,7 +50,7 @@ const MHReleaseTimeline: React.FC<ReleaseTimelineProps> = ({ isDarkMode }) => {
         },
         {
             year: 2006,
-            title: '怪物猎人2',
+            title: '怪物猎人2dos',
             platforms: ['PS2'],
             notableFeatures: [
                 '新增昼夜气候系统',
@@ -94,7 +94,7 @@ const MHReleaseTimeline: React.FC<ReleaseTimelineProps> = ({ isDarkMode }) => {
             platforms: ['PSP'],
             notableFeatures: [
                 '和风主题革新',
-                '新增雷狼龙怪物'
+                '新增怪物雷狼龙'
             ],
             cover: mhP3rd2010Cover
         },
@@ -104,7 +104,7 @@ const MHReleaseTimeline: React.FC<ReleaseTimelineProps> = ({ isDarkMode }) => {
             platforms: ['3DS'],
             notableFeatures: [
                 '首个3DS作品',
-                '新增碎龙和重弩'
+                '新增怪物碎龙'
             ],
             cover: mh3G2011Cover
         },

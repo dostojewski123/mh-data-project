@@ -65,7 +65,7 @@ const GameVersionMenu: React.FC<GameVersionMenuProps> = ({
         // 3. 触摸持续时间在合理范围内(30-100ms)
         if (target === game && !moved) {
             const duration = Date.now() - startTime;
-            if (duration > 30 && duration < 100) {
+            if (duration > 20 && duration < 100) {
                 handleInteraction(game);
             }
         }
