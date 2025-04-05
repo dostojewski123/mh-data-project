@@ -2,38 +2,38 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // 导入武器图标
-import greatswordImg from '.././../../assets/weaponmoves/world/WORLD-MV-GS.webp';
-import longswordImg from '../../../assets/weaponmoves/world/WORLD-MV-LS.webp';
-import swordandshieldImg from '../../../assets/weaponmoves/world/WORLD-MV-SS.webp';
-import dualbladesImg from '../../../assets/weaponmoves/world/WORLD-MV-DB.webp';
-import hammerImg from '../../../assets/weaponmoves/world/WORLD-MV-HAMMER.webp';
-import huntinghornImg from '../../../assets/weaponmoves/world/WORLD-MV-HH.webp';
-import lanceImg from '../../../assets/weaponmoves/world/WORLD-MV-LANCE.webp';
-import gunlanceImg from '../../../assets/weaponmoves/world/WORLD-MV-GL.webp';
-import switchaxeImg from '../../../assets/weaponmoves/world/WORLD-MV-SA.webp';
-import chargebladeImg from '../../../assets/weaponmoves/world/WORLD-MV-CB.webp';
-import insectglaiveImg from '../../../assets/weaponmoves/world/WORLD-MV-IG.webp';
-import lightbowgunImg from '../../../assets/weaponmoves/world/WORLD-MV-LB.webp';
-import heavybowgunImg from '../../../assets/weaponmoves/world/WORLD-MV-HB.webp';
-import bowImg from '../../../assets/weaponmoves/world/WORLD-MV-BOW.webp';
+import greatswordImg from '.././../../assets/weaponmoves/wilds/WILDS-MV-GS.webp';
+import longswordImg from '../../../assets/weaponmoves/wilds/WILDS-MV-LS.webp';
+import swordandshieldImg from '../../../assets/weaponmoves/wilds/WILDS-MV-SS.webp';
+import dualbladesImg from '../../../assets/weaponmoves/wilds/WILDS-MV-DB.webp';
+import hammerImg from '../../../assets/weaponmoves/wilds/WILDS-MV-HAMMER.webp';
+import huntinghornImg from '../../../assets/weaponmoves/wilds/WILDS-MV-HH.webp';
+import lanceImg from '../../../assets/weaponmoves/wilds/WILDS-MV-LANCE.webp';
+import gunlanceImg from '../../../assets/weaponmoves/wilds/WILDS-MV-GL.webp';
+import switchaxeImg from '../../../assets/weaponmoves/wilds/WILDS-MV-SA.webp';
+import chargebladeImg from '../../../assets/weaponmoves/wilds/WILDS-MV-CB.webp';
+import insectglaiveImg from '../../../assets/weaponmoves/wilds/WILDS-MV-IG.webp';
+import lightbowgunImg from '../../../assets/weaponmoves/wilds/WILDS-MV-LB.webp';
+import heavybowgunImg from '../../../assets/weaponmoves/wilds/WILDS-MV-HB.webp';
+import bowImg from '../../../assets/weaponmoves/wilds/WILDS-MV-BOW.webp';
 
 // 导入武器数据图表
-import greatswordDataImg from '../../../assets/weaponmoves/world/modal/WORLD-MV-GS-MODAL.webp';
-import longswordDataImg from '../../../assets/weaponmoves/world/modal/WORLD-MV-LS-MODAL.webp';
-import swordandshieldDataImg from '../../../assets/weaponmoves/world/modal/WORLD-MV-SS-MODAL.webp';
-import dualbladesDataImg from '../../../assets/weaponmoves/world/modal/WORLD-MV-DB-MODAL.webp';
-import hammerDataImg from '../../../assets/weaponmoves/world/modal/WORLD-MV-HAMMER-MODAL.webp';
-import huntinghornDataImg from '../../../assets/weaponmoves/world/modal/WORLD-MV-HH-MODAL.webp';
-import lanceDataImg from '../../../assets/weaponmoves/world/modal/WORLD-MV-LANCE-MODAL.webp';
-import gunlanceDataImg from '../../../assets/weaponmoves/world/modal/WORLD-MV-GL-MODAL.webp';
-import switchaxeDataImg from '../../../assets/weaponmoves/world/modal/WORLD-MV-SA-MODAL.webp';
-import chargebladeDataImg from '../../../assets/weaponmoves/world/modal/WORLD-MV-CB-MODAL.webp';
-import insectglaiveDataImg from '../../../assets/weaponmoves/world/modal/WORLD-MV-IG-MODAL.webp';
-import lightbowgunDataImg from '../../../assets/weaponmoves/world/modal/WORLD-MV-LB-MODAL.webp';
-import heavybowgunDataImg from '../../../assets/weaponmoves/world/modal/WORLD-MV-HB-MODAL.webp';
-import bowDataImg from '../../../assets/weaponmoves/world/modal/WORLD-MV-BOW-MODAL.webp';
+import greatswordDataImg from '../../../assets/weaponmoves/wilds/modal/WILDS-MV-GS-MODAL.webp';
+import longswordDataImg from '../../../assets/weaponmoves/wilds/modal/WILDS-MV-LS-MODAL.webp';
+import swordandshieldDataImg from '../../../assets/weaponmoves/wilds/modal/WILDS-MV-SS-MODAL.webp';
+import dualbladesDataImg from '../../../assets/weaponmoves/wilds/modal/WILDS-MV-DB-MODAL.webp';
+import hammerDataImg from '../../../assets/weaponmoves/wilds/modal/WILDS-MV-HAMMER-MODAL.webp';
+import huntinghornDataImg from '../../../assets/weaponmoves/wilds/modal/WILDS-MV-HH-MODAL.webp';
+import lanceDataImg from '../../../assets/weaponmoves/wilds/modal/WILDS-MV-LANCE-MODAL.webp';
+import gunlanceDataImg from '../../../assets/weaponmoves/wilds/modal/WILDS-MV-GL-MODAL.webp';
+import switchaxeDataImg from '../../../assets/weaponmoves/wilds/modal/WILDS-MV-SA-MODAL.webp';
+import chargebladeDataImg from '../../../assets/weaponmoves/wilds/modal/WILDS-MV-CB-MODAL.webp';
+import insectglaiveDataImg from '../../../assets/weaponmoves/wilds/modal/WILDS-MV-IG-MODAL.webp';
+import lightbowgunDataImg from '../../../assets/weaponmoves/wilds/modal/WILDS-MV-LB-MODAL.webp';
+import heavybowgunDataImg from '../../../assets/weaponmoves/wilds/modal/WILDS-MV-HB-MODAL.webp';
+import bowDataImg from '../../../assets/weaponmoves/wilds/modal/WILDS-MV-BOW-MODAL.webp';
 
-interface WorldWeaponMovesProps {
+interface WildsWeaponMovesProps {
     isDarkMode: boolean;
 }
 
@@ -54,11 +54,11 @@ const weaponImages = [
     { name: '弓', image: bowImg, dataImage: bowDataImg },
 ];
 
-const WorldWeaponMoves: React.FC<WorldWeaponMovesProps> = ({ isDarkMode }) => {
+const WildsWeaponMoves: React.FC<WildsWeaponMovesProps> = ({ isDarkMode }) => {
     const navigate = useNavigate();
 
     const handleWeaponClick = (weaponName: string, dataImage: string) => {
-        navigate(`/world/weapon-moves/${encodeURIComponent(weaponName)}`, {
+        navigate(`/wilds/weapon-moves/${encodeURIComponent(weaponName)}`, {
             state: { dataImage }
         });
     };
@@ -69,11 +69,11 @@ const WorldWeaponMoves: React.FC<WorldWeaponMovesProps> = ({ isDarkMode }) => {
             <div className="ml-2 bg-transparent mb-2">
                 <div className="flex justify-between items-center mb-6">
                     <h1 className={`text-xl md:text-2xl ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
-                        怪物猎人：世界 - 武器动作值
+                        怪物猎人：荒野 - 武器动作值
                     </h1>
                 </div>
                 <p className={`mb-12 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
-                    这里是《怪物猎人：世界》的武器动作值数据表。点击武器图标查看详细动作值。
+                    这里是《怪物猎人：荒野》的武器动作值数据表(数据还没更新，暂时用世界替代)。点击武器图标查看详细动作值。
                 </p>
             </div>
 
@@ -101,4 +101,4 @@ const WorldWeaponMoves: React.FC<WorldWeaponMovesProps> = ({ isDarkMode }) => {
     );
 };
 
-export default WorldWeaponMoves;
+export default WildsWeaponMoves;

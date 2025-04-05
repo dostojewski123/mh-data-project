@@ -2,62 +2,67 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // 导入武器图标
-import greatswordImg from '../../assets/weaponmoves/rise/RISE-MV-GS.webp';
-import longswordImg from '../../assets/weaponmoves/rise/RISE-MV-LS.webp';
-import swordandshieldImg from '../../assets/weaponmoves/rise/RISE-MV-SS.webp';
-import dualbladesImg from '../../assets/weaponmoves/rise/RISE-MV-DB.webp';
-import hammerImg from '../../assets/weaponmoves/rise/RISE-MV-HAMMER.webp';
-import huntinghornImg from '../../assets/weaponmoves/rise/RISE-MV-HH.webp';
-import lanceImg from '../../assets/weaponmoves/rise/RISE-MV-LANCE.webp';
-import gunlanceImg from '../../assets/weaponmoves/rise/RISE-MV-GL.webp';
-import switchaxeImg from '../../assets/weaponmoves/rise/RISE-MV-SA.webp';
-import chargebladeImg from '../../assets/weaponmoves/rise/RISE-MV-CB.webp';
-import insectglaiveImg from '../../assets/weaponmoves/rise/RISE-MV-IG.webp';
-import lightbowgunImg from '../../assets/weaponmoves/rise/RISE-MV-LB.webp';
-import heavybowgunImg from '../../assets/weaponmoves/rise/RISE-MV-HB.webp';
-import bowImg from '../../assets/weaponmoves/rise/RISE-MV-BOW.webp';
+import greatswordImg from '../../../assets/weaponmoves/rise/RISE-MV-GS.webp';
+import longswordImg from '../../../assets/weaponmoves/rise/RISE-MV-LS.webp';
+import swordandshieldImg from '../../../assets/weaponmoves/rise/RISE-MV-SS.webp';
+import dualbladesImg from '../../../assets/weaponmoves/rise/RISE-MV-DB.webp';
+import hammerImg from '../../../assets/weaponmoves/rise/RISE-MV-HAMMER.webp';
+import huntinghornImg from '../../../assets/weaponmoves/rise/RISE-MV-HH.webp';
+import lanceImg from '../../../assets/weaponmoves/rise/RISE-MV-LANCE.webp';
+import gunlanceImg from '../../../assets/weaponmoves/rise/RISE-MV-GL.webp';
+import switchaxeImg from '../../../assets/weaponmoves/rise/RISE-MV-SA.webp';
+import chargebladeImg from '../../../assets/weaponmoves/rise/RISE-MV-CB.webp';
+import insectglaiveImg from '../../../assets/weaponmoves/rise/RISE-MV-IG.webp';
+import lightbowgunImg from '../../../assets/weaponmoves/rise/RISE-MV-LB.webp';
+import heavybowgunImg from '../../../assets/weaponmoves/rise/RISE-MV-HB.webp';
+import bowImg from '../../../assets/weaponmoves/rise/RISE-MV-BOW.webp';
 
 // 导入武器数据图表
-import greatswordDataImg from '../../assets/weaponmoves/rise/modal/RISE-MV-GS-MODAL.webp';
-import longswordDataImg from '../../assets/weaponmoves/rise/modal/RISE-MV-LS-MODAL.webp';
-import swordandshieldDataImg from '../../assets/weaponmoves/rise/modal/RISE-MV-SS-MODAL.webp';
-import dualbladesDataImg from '../../assets/weaponmoves/rise/modal/RISE-MV-DB-MODAL.webp';
-import hammerDataImg from '../../assets/weaponmoves/rise/modal/RISE-MV-HAMMER-MODAL.webp';
-import huntinghornDataImg from '../../assets/weaponmoves/rise/modal/RISE-MV-HH-MODAL.webp';
-import lanceDataImg from '../../assets/weaponmoves/rise/modal/RISE-MV-LANCE-MODAL.webp';
-import gunlanceDataImg from '../../assets/weaponmoves/rise/modal/RISE-MV-GL-MODAL.webp';
-import switchaxeDataImg from '../../assets/weaponmoves/rise/modal/RISE-MV-SA-MODAL.webp';
-import chargebladeDataImg from '../../assets/weaponmoves/rise/modal/RISE-MV-CB-MODAL.webp';
-import insectglaiveDataImg from '../../assets/weaponmoves/rise/modal/RISE-MV-IG-MODAL.webp';
-import lightbowgunDataImg from '../../assets/weaponmoves/rise/modal/RISE-MV-LB-MODAL.webp';
-import heavybowgunDataImg from '../../assets/weaponmoves/rise/modal/RISE-MV-HB-MODAL.webp';
-import bowDataImg from '../../assets/weaponmoves/rise/modal/RISE-MV-BOW-MODAL.webp';
+import greatswordDataImg1 from '../../../assets/weaponmoves/rise/modal/RISE-MV-GS-MODAL1.webp';
+import greatswordDataImg2 from '../../../assets/weaponmoves/rise/modal/RISE-MV-GS-MODAL2.webp';
+import longswordDataImg from '../../../assets/weaponmoves/rise/modal/RISE-MV-LS-MODAL.webp';
+import swordandshieldDataImg from '../../../assets/weaponmoves/rise/modal/RISE-MV-SS-MODAL.webp';
+import dualbladesDataImg1 from '../../../assets/weaponmoves/rise/modal/RISE-MV-DB-MODAL1.webp';
+import dualbladesDataImg2 from '../../../assets/weaponmoves/rise/modal/RISE-MV-DB-MODAL2.webp';
+import hammerDataImg from '../../../assets/weaponmoves/rise/modal/RISE-MV-HAMMER-MODAL.webp';
+import huntinghornDataImg from '../../../assets/weaponmoves/rise/modal/RISE-MV-HH-MODAL.webp';
+import lanceDataImg from '../../../assets/weaponmoves/rise/modal/RISE-MV-LANCE-MODAL.webp';
+import gunlanceDataImg from '../../../assets/weaponmoves/rise/modal/RISE-MV-GL-MODAL.webp';
+import switchaxeDataImg from '../../../assets/weaponmoves/rise/modal/RISE-MV-SA-MODAL.webp';
+import chargebladeDataImg from '../../../assets/weaponmoves/rise/modal/RISE-MV-CB-MODAL.webp';
+import insectglaiveDataImg1 from '../../../assets/weaponmoves/rise/modal/RISE-MV-IG-MODAL1.webp';
+import insectglaiveDataImg2 from '../../../assets/weaponmoves/rise/modal/RISE-MV-IG-MODAL2.webp';
+import lightbowgunDataImg1 from '../../../assets/weaponmoves/rise/modal/RISE-MV-LB-MODAL1.webp';
+import lightbowgunDataImg2 from '../../../assets/weaponmoves/rise/modal/RISE-MV-LB-MODAL2.webp';
+import heavybowgunDataImg1 from '../../../assets/weaponmoves/rise/modal/RISE-MV-HB-MODAL1.webp';
+import heavybowgunDataImg2 from '../../../assets/weaponmoves/rise/modal/RISE-MV-HB-MODAL2.webp';
+import bowDataImg from '../../../assets/weaponmoves/rise/modal/RISE-MV-BOW-MODAL.webp';
 
 interface RiseWeaponMovesProps {
     isDarkMode: boolean;
 }
 
 const weaponImages = [
-    { name: '大剑', image: greatswordImg, dataImage: greatswordDataImg },
+    { name: '大剑', image: greatswordImg, dataImage: [greatswordDataImg1, greatswordDataImg2] },
     { name: '太刀', image: longswordImg, dataImage: longswordDataImg },
     { name: '单手剑', image: swordandshieldImg, dataImage: swordandshieldDataImg },
-    { name: '双剑', image: dualbladesImg, dataImage: dualbladesDataImg },
+    { name: '双剑', image: dualbladesImg, dataImage: [dualbladesDataImg1, dualbladesDataImg2] },
     { name: '大锤', image: hammerImg, dataImage: hammerDataImg },
     { name: '狩猎笛', image: huntinghornImg, dataImage: huntinghornDataImg },
     { name: '长枪', image: lanceImg, dataImage: lanceDataImg },
     { name: '铳枪', image: gunlanceImg, dataImage: gunlanceDataImg },
     { name: '斩击斧', image: switchaxeImg, dataImage: switchaxeDataImg },
     { name: '充能斧', image: chargebladeImg, dataImage: chargebladeDataImg },
-    { name: '操虫棍', image: insectglaiveImg, dataImage: insectglaiveDataImg },
-    { name: '轻弩', image: lightbowgunImg, dataImage: lightbowgunDataImg },
-    { name: '重弩', image: heavybowgunImg, dataImage: heavybowgunDataImg },
+    { name: '操虫棍', image: insectglaiveImg, dataImage: [insectglaiveDataImg1, insectglaiveDataImg2] },
+    { name: '轻弩', image: lightbowgunImg, dataImage: [lightbowgunDataImg1, lightbowgunDataImg2] },
+    { name: '重弩', image: heavybowgunImg, dataImage: [heavybowgunDataImg1, heavybowgunDataImg2] },
     { name: '弓', image: bowImg, dataImage: bowDataImg },
 ];
 
 const riseWeaponMoves: React.FC<RiseWeaponMovesProps> = ({ isDarkMode }) => {
     const navigate = useNavigate();
 
-    const handleWeaponClick = (weaponName: string, dataImage: string) => {
+    const handleWeaponClick = (weaponName: string, dataImage: string | string[]) => {
         navigate(`/rise/weapon-moves/${encodeURIComponent(weaponName)}`, {
             state: { dataImage }
         });

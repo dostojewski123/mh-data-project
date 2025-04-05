@@ -1,8 +1,8 @@
 import React from 'react';
-import Welcome1 from './Home/Welcome1';
-import Welcome2 from './Home/Welcome2';
-import FeatureCards from './Home/FeatureCards';
-import LatestUpdates from './Home/LatestUpdates'
+import Welcome1 from './Welcome1';
+import Welcome2 from './Welcome2';
+import FeatureCards from './FeatureCards';
+import LatestUpdates from './LatestUpdates'
 
 interface WildsHomeProps {
     isDarkMode: boolean;
