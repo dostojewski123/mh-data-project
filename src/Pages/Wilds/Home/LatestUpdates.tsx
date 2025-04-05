@@ -16,9 +16,9 @@ const LatestUpdates: React.FC<LatestUpdatesProps> = ({ isDarkMode }) => {
             description: "基础模块规划与架构搭建，前端代码将在之后开源。"
         },
         {
-            title: "世界和崛起武器动作值数据更新",
+            title: "荒野动作值板块构建",
             date: "2025-4-5",
-            description: "世界与崛起全武器动作值完整数据录入，补充了大量标注和描述。"
+            description: "荒野动作值板块构建。"
         }
     ];
 

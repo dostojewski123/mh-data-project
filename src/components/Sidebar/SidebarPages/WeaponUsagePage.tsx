@@ -198,7 +198,7 @@ const WeaponUsagePage: React.FC<WeaponUsagePageProps> = ({ isDarkMode }) => {
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8">
                     <div>
                         <h1 className={`text-3xl font-bold ${isDarkMode ? 'text-amber-400' : 'text-amber-700'} mb-2`}>
-                            全武器使用率排行
+                            全武器使用率排行 (说明文本通过AI自动补充, 之后更新会重写)
                         </h1>
                         <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                             基于Capcom官方数据和社区调查统计的最新武器使用情况

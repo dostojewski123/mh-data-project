@@ -225,7 +225,7 @@ const MHReleaseTimeline: React.FC<ReleaseTimelineProps> = ({ isDarkMode }) => {
                         </p>
                         <p>
                             <span className="font-semibold text-blue-500">提示：</span>
-                            从下往上浏览，体验猎人装备的进化之路！
+                            部分数据和图片可能存在错误, 主要评述目前由AI生成, 之后更新会修改。
                         </p>
                     </Card>
                 </motion.div>

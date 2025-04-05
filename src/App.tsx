@@ -28,7 +28,6 @@ function App() {
   const [selectedGame, setSelectedGame] = useState<GameVersion>('world');
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
 
-  // 修改 handleGameChange
   const navigate = useNavigate();
   const handleGameChange = (game: GameVersion) => {
     setSelectedGame(game);
@@ -51,17 +50,14 @@ function App() {
             toggleSidebar={toggleSidebar}
           />
         </div>
-        <div
-          className={`flex-1 flex flex-col min-w-0 transition-all duration-220 ease-in-out ${isDarkMode ? 'bg-mh-starrysky' : 'bg-mh-parchment-1'
-            }`}
-        >
+        <div className="flex-1 flex flex-col min-w-0">
           <SubNavbar isDarkMode={isDarkMode} selectedGame={selectedGame} isSidebarOpen={isSidebarOpen} />
           <div className="mt-20 flex-1 overflow-auto stable-scrollbar">
             <AnimatedRoutes isDarkMode={isDarkMode} />
-            <Footer isDarkMode={isDarkMode} />
           </div>
         </div>
       </div>
+      <Footer isDarkMode={isDarkMode} />
     </div>
   );
 }

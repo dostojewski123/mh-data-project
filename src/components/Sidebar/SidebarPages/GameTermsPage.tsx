@@ -18,7 +18,7 @@ const categoryIcons: CategoryIcons = {
     '战斗相关': <Shield className="w-5 h-5" />,
     '装备相关': <Shirt className="w-5 h-5" />,
     '怪物相关': <Skull className="w-5 h-5" />,
-    '游戏机制': <Zap className="w-5 h-5" />
+    '机制与其他': <Zap className="w-5 h-5" />
 };
 
 // 定义术语类型
@@ -296,11 +296,53 @@ const GameTermsPage: React.FC<GameTermsPageProps> = ({ isDarkMode }) => {
                     explanation: '一部分在几乎所有地区都会出现且频繁乱入到猎人与其他怪物的战斗中的大型非古龙怪物。',
                     example: '金狮子, 恐暴龙, 爆鳞龙等',
                     animation: 'move'
-                }
+                },
+                {
+                    term: '冰原f4',
+                    explanation: '有时候也简称“f4”是对怪物猎人冰原更新完毕后, 四个玩家经常游玩的怪物的统称, 分别为: 历战激昂金狮子, 煌黑龙, 历战王冰呪龙, 黑龙。',
+                    example: '冰原4是冰原末期相当有难度的挑战',
+                    animation: 'cart'
+                },
+                {
+                    term: '肥宅',
+                    explanation: '玩家对岩贼龙取的外号, 因其圆滚滚的肚子在地上拖行酷似不爱运动的宅而得名。',
+                    example: '勇敢肥宅, 不怕困难, 对谁都要来两颗',
+                    animation: 'cart'
+                },
+                {
+                    term: '中分哥',
+                    explanation: '玩家对大贼龙取的外号, 因其头部后方两股黄色长毛而得名。',
+                    example: '中分哥又被蛮颚欺负了',
+                    animation: 'cart'
+                },
+                {
+                    term: '白色大粪',
+                    explanation: '玩家对于冰牙龙取的外号, 因其在冰原主线的难度陡升的位置, 且行为模式多为到处乱飞, 颇有“你打你的, 我打我的”的样子, 是名副其实的粪怪, 加上身形主要呈白色, 故得此外号。',
+                    example: '打白色大粪记得先破手',
+                    animation: 'cart'
+                },
+                {
+                    term: '玉娘、黑狗',
+                    explanation: '对于怪物“狱狼龙”的别称, 因为“狱狼”谐音“玉娘”得此名, 因其主要为黑, 红配色, 有时候也叫做“黑狗”。',
+                    example: '玉娘初见位于巨魔之地',
+                    animation: 'cart'
+                },
+                {
+                    term: '弟弟龙',
+                    explanation: '是对于“天地煌啼龙”的别称, 因为其在主线剧情种表现过于不堪（被主角单挑击败以及被歼世灭尽龙杀死）加之名字中的“地”谐音“弟”故得此名。',
+                    example: '打完弟弟龙冰原主线就结束了',
+                    animation: 'cart'
+                },
+                {
+                    term: '咩咩子',
+                    explanation: '是对于“歼世灭尽龙”以及“灭尽龙”的别称, 因为“灭”谐音“咩”, 外加倒地的时候双脚扑腾部分玩家认为其有几分可爱, 以及其在世界、冰原剧情中拥有不少戏份. 故得此名。',
+                    example: '与心爱的咩咩子行至世界尽头',
+                    animation: 'cart'
+                },
             ]
         },
         {
-            category: '游戏机制',
+            category: '机制与其他',
             terms: [
                 {
                     term: '软化',
@@ -337,7 +379,31 @@ const GameTermsPage: React.FC<GameTermsPageProps> = ({ isDarkMode }) => {
                     explanation: '指武器的锋利度, 从低到高依次为红橙黄绿蓝白紫, 斩味越高则所拥有的伤害补正越高, 并越不容易弹刀, 可以对怪物造成更高的伤害, 需要磨刀来保持斩味。',
                     example: '怪物换区了, 可以趁机磨刀来保证战斗时可以造成最高伤害',
                     animation: 'move'
-                }
+                },
+                {
+                    term: 'TGY',
+                    explanation: '指的是怪物猎人世界的总监藤冈要, 因其名字顺口外加玩家对于地图内各种地形导致操作失误的痛恨, 一般用其指代各种导致玩家操作失误的地形。',
+                    example: 'TGY! nm! 我滑步变搓背了',
+                    animation: 'cart'
+                },
+                {
+                    term: '天尊',
+                    explanation: '指游戏内技术非常高超的玩家。',
+                    example: '是天尊，我们有救了',
+                    animation: 'cart'
+                },
+                {
+                    term: 'ldx',
+                    explanation: '是“老东西”的首字母缩写, 一般代指游玩时间较久的玩家。',
+                    example: '信号弹一般能召唤出ldx',
+                    animation: 'cart'
+                },
+                {
+                    term: 'xdx',
+                    explanation: '是“小东西”的首字母缩写, 指游玩时间较短的新手玩家。',
+                    example: 'xdx实在打不过可以发信号弹',
+                    animation: 'cart'
+                },
             ]
         }
     ];
@@ -396,7 +462,7 @@ const GameTermsPage: React.FC<GameTermsPageProps> = ({ isDarkMode }) => {
                 className="mb-8"
             >
                 <h1 className={`text-3xl md:text-4xl font-bold mb-4 ${isDarkMode ? 'text-amber-400' : 'text-amber-600'}`}>
-                    怪物猎人术语词典
+                    怪物猎人术语与黑话词典
                 </h1>
                 <p className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                     检索怪物猎人世界的专业术语和猎人黑话, 成为真正的老猎人！
