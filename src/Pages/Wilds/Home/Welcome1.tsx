@@ -93,7 +93,7 @@ const Welcome1: React.FC<Welcome1Props> = ({ isDarkMode }) => {
             updateLightning();
             timeoutRef.current = setTimeout(() => {
                 animationFrameRef.current = requestAnimationFrame(animate);
-            }, 3000 + Math.random() * 5000); // 3-8秒随机间隔
+            }, 2000 + Math.random() * 3000); // 2-5秒随机间隔
         };
 
         animate();

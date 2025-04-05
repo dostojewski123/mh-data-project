@@ -47,21 +47,75 @@ const GameTermsPage: React.FC<GameTermsPageProps> = ({ isDarkMode }) => {
             terms: [
                 {
                     term: 'GP',
-                    explanation: 'Guard Point(防御点)，指武器在特定动作中自动带有防御判定的帧数，如盾斧变形斩、太刀见切等',
+                    explanation: 'Guard Point(防御点)，指武器在特定动作中自动带有防御判定的帧数，如盾斧变形斩,后面指意上有扩展，广义上的表示通过将某些很短的派生窗口与怪物的攻击重合来达到抵消怪物攻击目的的方式',
                     example: '盾斧玩家常用GP来防御怪物攻击并反击',
                     animation: 'shield'
                 },
                 {
                     term: '见切',
-                    explanation: '太刀的特殊回避反击技巧，正式名称为"看破斩"，成功回避攻击后可接大回旋斩开刃',
+                    explanation: '太刀的特殊回避反击技巧，正式名称为"看破斩"，成功回避攻击后可接气刃大回转斩开刃',
                     example: '见切成功时会有特殊的音效和特效',
                     animation: 'dodge'
                 },
                 {
                     term: '登龙',
-                    explanation: '太刀的"飞翔踢"接"气刃兜割"的连招，因动作像龙腾空而得名',
-                    example: '开红刃后登龙是太刀的主要输出手段',
+                    explanation: '太刀的招式：气刃兜割，因动作像龙腾空而得名',
+                    example: '开红刃后登龙是世界太刀的主要输出手段',
                     animation: 'jump'
+                },
+                {
+                    term: '切登，居登',
+                    explanation: '为太刀的攻击连段，切登指的是见切后不回砍立刻派生气刃突刺/飞翔踢，而居登是指居合后立刻派生气刃突刺/飞翔踢',
+                    example: '居登是太刀输出的重要组成部分',
+                    animation: 'slide'
+                },
+                {
+                    term: '大地一击',
+                    explanation: '为大锤，狩猎笛横挥后前砸的动作',
+                    example: '大锤大地一击是其游走后主要输出手段',
+                    animation: 'slide'
+                },
+                {
+                    term: '拨浪鼓',
+                    explanation: '为冰原狩猎笛独有的响音攻击，因攻击动作酷似玩拨浪鼓而闻名',
+                    example: '无',
+                    animation: 'slide'
+                },
+                {
+                    term: '下戳',
+                    explanation: '为操虫棍的攻击急袭突刺，因动作为突然向大地俯冲戳去而得名',
+                    example: '下戳是冰原虫棍的主要输出手段',
+                    animation: 'slide'
+                },
+                {
+                    term: '直升机',
+                    explanation: '为操虫棍空中的舞踏连段，因不断挥舞的操虫棍如同直升机的桨叶而得名',
+                    example: '直升机不失为一种简短的打怪方式',
+                    animation: 'slide'
+                },
+                {
+                    term: '电风扇',
+                    explanation: '为虫棍的攻击强化跳跃斩，因为棍子在纵向旋转宛如风扇得名',
+                    example: '操虫棍可以用电风扇快速叠骑乘',
+                    animation: 'slide'
+                },
+                {
+                    term: '人车',
+                    explanation: '为长枪的招式”突进“，因为其有着与怪物龙车相似的接触即会造成伤害的特性得名人车',
+                    example: '人车最高速度比炮还快',
+                    animation: 'slide'
+                },
+                {
+                    term: '开刃',
+                    explanation: '为太刀斩斧提升气刃等级/进入剑强化模式进行的操作的统称',
+                    example: '太刀第一要务就是开刃',
+                    animation: 'slide'
+                },
+                {
+                    term: '红盾，红剑，红斧，电锯',
+                    explanation: '分别为盾斧的属性强化状态，剑强化状态，斧强化状态的称呼，因为其开启时对应的图标会变红得名，而电锯则是斧强化形态的别称，因为进入斧强化形态后斧模式攻击时盾斧的盾（也就是斧刃）会不断旋转宛如电锯得名',
+                    example: '开红盾是盾斧进入输出状态的第一要务',
+                    animation: 'slide'
                 },
                 {
                     term: '真蓄',
@@ -76,8 +130,38 @@ const GameTermsPage: React.FC<GameTermsPageProps> = ({ isDarkMode }) => {
                     animation: 'slide'
                 },
                 {
+                    term: 'xppg，xhpg，hpg',
+                    explanation: '弓的蓄力连段，由迅雷闪击，蓄力步伐，平射，刚射四个部分组成，取其拼音的首字母简写为：x（迅雷闪击），h（蓄力步伐的俗称“滑步”），p（平射），g（刚射），“xhpg”的意思的就是：迅雷闪击派生蓄力步伐派生平射派生刚射',
+                    example: '这招可以打一个xhpg',
+                    animation: 'slide'
+                },
+                {
+                    term: '打年糕',
+                    explanation: '为大锤的敲打攻击连段，因为其动作酷似打年糕而得此外号',
+                    example: '大锤击晕倒地一般会打一套年糕',
+                    animation: 'slide'
+                },
+                {
+                    term: '本垒，逆本垒',
+                    explanation: '为大锤的“压迫攻击”如回旋强压迫，压迫等因为其攻击动作酷似棒球中的“本垒打”而得名，而“逆本垒”则是反挥动作，因为挥舞方向与压迫相反而得名',
+                    example: '大锤的本垒伤害很不错',
+                    animation: 'slide'
+                },
+                {
+                    term: '三连，六连，九连',
+                    explanation: '双刀的鬼人连斩连段，因为鬼人反手斩接鬼人二连斩一共三刀得名“三连”，而六连则是由于鬼人二连斩后可派生鬼人六连斩，则将整套反手斩—二连斩—六连斩连段合并称之为“六连“，偶尔也有人称之为”九连“',
+                    example: '大锤击晕倒地一般会打一套年糕',
+                    animation: 'slide'
+                },
+                {
+                    term: '升龙',
+                    explanation: '有两个含义，一是双刀的回旋捞斩，二是片手的对空飞翔爪，因为动作酷似升龙拳而得名',
+                    example: '双刀升龙可以软化肉质',
+                    animation: 'slide'
+                },
+                {
                     term: 'JR',
-                    explanation: '片手的Just Rush，官方名称为致命连击，是冰原中片手的一种连招，当闪烁红光时按下可以造成巨大伤害',
+                    explanation: '片手的Just Rush，官方名称为致命连击，是冰原及其以后的作品中片手的一连招式，当闪烁红光时按下可以拥有较高的伤害提升',
                     example: '找准时机使用JR是片手的必备技巧之一',
                     animation: 'move'
                 },
@@ -86,7 +170,14 @@ const GameTermsPage: React.FC<GameTermsPageProps> = ({ isDarkMode }) => {
                     explanation: '双刀借助斜坡使用的特殊跳跃攻击，当命中怪物时会让猎人如同车轮一般滚过怪物的整条背部，并不断使用双刀劈砍滚过的位置',
                     example: '绚辉龙红温后背部肉质很好，可以通过搓背来打出高额伤害',
                     animation: 'move'
-                }
+                },
+                {
+                    term: '113，123，333',
+                    explanation: '大剑的蓄力斩—强蓄力斩—真蓄力斩连段，用简单的数字表示该等级下蓄力到的等级，如“323”表示：蓄力斩三级派生强蓄力斩二级派生真蓄力斩三级，而若中间的数字为0，如“103”则表示使用强化射击（冰原独有）跳过强蓄力斩阶段直接打出真蓄力斩，所以“103”表示拔刀斩—强化射击—真蓄力斩3级。特殊情况下（一般出现在冰原的讨论中）还有四个数字，如“1233”，最后一个数字表示利用翻滚冲撞攻击横拍强化射击快速派生的第二个真蓄力斩的蓄力等级',
+                    example: '倒地大部分都来得及打323',
+                    animation: 'move'
+                },
+
             ]
         },
         {
@@ -100,25 +191,25 @@ const GameTermsPage: React.FC<GameTermsPageProps> = ({ isDarkMode }) => {
                 },
                 {
                     term: '龙车',
-                    explanation: '指怪物直线冲撞的攻击方式，因多数飞龙种使用此招而得名',
-                    example: '灭尽龙的龙车后经常接如来神掌',
+                    explanation: '指怪物用全身奔跑冲撞的攻击方式，因体型庞大的怪物冲撞如同快速行驶的车辆而得名',
+                    example: '冰呪龙的龙车可能衔接横扫吐息',
                     animation: 'charge'
                 },
                 {
                     term: '粪招',
                     explanation: '指怪物难以处理、令人烦躁的攻击招式',
-                    example: '金狮子的连续后跳粪招真的烦人',
+                    example: '金狮子的连续王八拳粪招真的烦人',
                     animation: 'annoying'
                 },
                 {
                     term: '锁头',
-                    explanation: '通过持续攻击怪物头部使其频繁硬直的控制技巧',
+                    explanation: '持续攻击怪物头部而不攻击其他部位的打击方式',
                     example: '锤子玩家擅长锁头让怪物一直倒地',
                     animation: 'stun'
                 },
                 {
                     term: '换区',
-                    explanation: '怪物血量降低到一定程度后会离开当前区域的行为',
+                    explanation: '怪物在一定情况下会离开当前区域前往其他区域的行为',
                     example: '等它换区后再捕获比较安全',
                     animation: 'move'
                 },
@@ -130,8 +221,8 @@ const GameTermsPage: React.FC<GameTermsPageProps> = ({ isDarkMode }) => {
                 },
                 {
                     term: '打点',
-                    explanation: '指猎人抓住怪物的某一个部位不放，死追猛打的操作，通常为怪物肉质最好的部位，可以借此打出多次连续硬质帮助狩猎',
-                    example: '对这个怪物，可以通过对头和手交替输出，造成两次连续的倒地硬直帮助狩猎',
+                    explanation: '指猎人攻击命中的部位，一般能让攻击几乎命中一个部位称为“打点集中，而能让攻击命中自己想要命中的部位称之为”打点好',
+                    example: '大剑是一把打点非常好的武器',
                     animation: 'move'
                 }
             ]
@@ -147,15 +238,9 @@ const GameTermsPage: React.FC<GameTermsPageProps> = ({ isDarkMode }) => {
                 },
                 {
                     term: '珠子',
-                    explanation: '装饰品的俗称，镶嵌在装备上提供技能点数',
-                    example: '攻击珠2太稀有了',
+                    explanation: '装饰品的俗称，镶嵌在装备上提供技能',
+                    example: '攻击珠太稀有了',
                     animation: 'deco'
-                },
-                {
-                    term: '混装',
-                    explanation: '混合不同套装部件以获得最佳技能组合的配装方式',
-                    example: '这套混装出了攻7看破7',
-                    animation: 'mix'
                 },
                 {
                     term: '幻化',
@@ -170,27 +255,21 @@ const GameTermsPage: React.FC<GameTermsPageProps> = ({ isDarkMode }) => {
             terms: [
                 {
                     term: '古龙',
-                    explanation: '游戏中最强的怪物分类，拥有改变天象等特殊能力',
+                    explanation: '游戏中最强的怪物分类”古龙种“拥有改变天象等特殊能力',
                     example: '炎王龙、钢龙、灭尽龙都是古龙',
                     animation: 'elder'
                 },
                 {
                     term: '二名',
-                    explanation: '特殊个体怪物，拥有独特前缀名和强化招式',
+                    explanation: '怪物猎人XX/GU中独有的类型，拥有大量与原怪物的区别',
                     example: '鏖魔角龙、青电主电龙',
                     animation: 'variant'
                 },
                 {
                     term: '亚种',
-                    explanation: '与原种不同属性的变种怪物',
-                    example: '红莲爆鳞龙是爆鳞龙的亚种',
+                    explanation: '与原种具有不同特征的变种怪物',
+                    example: '雷颚龙是蛮颚龙的亚种',
                     animation: 'subspecies'
-                },
-                {
-                    term: '特殊许可',
-                    explanation: '特别强大的个体怪物，通常有独特前缀和增强能力',
-                    example: '历战王、激昂金狮子等',
-                    animation: 'tempered'
                 },
                 {
                     term: '封面怪',
@@ -200,7 +279,7 @@ const GameTermsPage: React.FC<GameTermsPageProps> = ({ isDarkMode }) => {
                 },
                 {
                     term: '世界警察',
-                    explanation: '一部分在所有地区都会出现且频繁乱入到猎人与其他怪物的战斗中的大型非古龙怪物',
+                    explanation: '一部分在几乎所有地区都会出现且频繁乱入到猎人与其他怪物的战斗中的大型非古龙怪物',
                     example: '金狮子，恐暴龙，爆鳞龙等',
                     animation: 'move'
                 }
@@ -241,7 +320,7 @@ const GameTermsPage: React.FC<GameTermsPageProps> = ({ isDarkMode }) => {
                 },
                 {
                     term: '斩味',
-                    explanation: '指武器的锋利度，从低到高依次为红橙黄绿蓝白紫，斩味越高则所拥有的伤害补正越高，可以对怪物造成更高的伤害，需要磨刀来保持斩味',
+                    explanation: '指武器的锋利度，从低到高依次为红橙黄绿蓝白紫，斩味越高则所拥有的伤害补正越高，并越不容易弹刀，可以对怪物造成更高的伤害，需要磨刀来保持斩味',
                     example: '怪物换区了，可以趁机磨刀来保证战斗时可以造成最高伤害',
                     animation: 'move'
                 }
